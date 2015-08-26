@@ -56,8 +56,9 @@ public class StringManipulation {
 
 	public static void reverseChars(char[] inputArray, int start, int end) {
 		
-		//for String input, invoke 
+		//when only input is String input, add following 
 		//char[] inputArray = input.toCharArray();
+		//reverseChars(inputArr, 0, input.length() - 1);
 		char temp;
 		while (end > start) {
 			temp = inputArray[start];
