@@ -1,4 +1,4 @@
-package main.java.ds.stack;
+package ds.stack;
 
 public class MyStack {
 

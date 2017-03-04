@@ -1,11 +1,8 @@
-package main.java.sorting;
-
-import static org.junit.Assert.*;
-
-import main.java.sorting.SelectionSort;
-import main.java.sorting.SortUtil;
+package sorting;
 
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 
 public class SelectionSortTest {

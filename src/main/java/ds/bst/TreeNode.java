@@ -1,4 +1,4 @@
-package main.java.ds.bst;
+package ds.bst;
 
 public class TreeNode {
 

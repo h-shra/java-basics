@@ -1,18 +1,19 @@
-package main.java.sorting;
-
-import static org.junit.Assert.*;
+package sorting;
 
 import org.junit.Test;
 
-public class InsertionSortTest {
+import static org.junit.Assert.assertEquals;
+
+
+public class BubbleSortTest {
 
     @Test
     public void testSort() throws Exception {
-        int [] unsorted = {1, 10, 8, 0, 46, 100, 1, 2};
+        int [] unsorted = {11, 0, 8, 5, 46, 100};
         SortUtil sortUtil = new SortUtil();
-        InsertionSort insertionSort = new InsertionSort();
+        BubbleSort bubbleSort = new BubbleSort();
         sortUtil.printArray(unsorted);
-        insertionSort.sort(unsorted);
+        bubbleSort.sort(unsorted);
         sortUtil.printArray(unsorted);
         assertEquals(0, unsorted[0]);
     }

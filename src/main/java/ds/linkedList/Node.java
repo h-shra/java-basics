@@ -1,4 +1,4 @@
-package main.java.ds.linkedList;
+package ds.linkedList;
 
 public class Node {
 	Node next;
