@@ -9,7 +9,7 @@ public class BubbleSortTest {
 
     @Test
     public void testSort() throws Exception {
-        int [] unsorted = {11, 0, 8, 5, 46, 100};
+        int[] unsorted = {11, 0, 8, 5, 46, 100};
         SortUtil sortUtil = new SortUtil();
         BubbleSort bubbleSort = new BubbleSort();
         sortUtil.printArray(unsorted);

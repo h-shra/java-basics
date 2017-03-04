@@ -8,8 +8,8 @@ public class SortUtil {
         arr[index2] = temp;
     }
 
-    public void printArray(int [] inputArr) {
-        for (int i=0; i< inputArr.length;  i++) {
+    public void printArray(int[] inputArr) {
+        for (int i = 0; i < inputArr.length; i++) {
             System.out.print(inputArr[i] + "\t");
         }
         System.out.println();
