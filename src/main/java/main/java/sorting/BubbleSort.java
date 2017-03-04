@@ -1,7 +1,5 @@
 package main.java.sorting;
 
-import java.util.HashMap;
-
 public class BubbleSort {
     SortUtil sortUtil = new SortUtil();
     public void sort(int [] inputArr) {
