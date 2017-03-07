@@ -14,7 +14,7 @@ public class StringManipulation {
         flag = hasUniqueChars("abc101");
         System.out.println(flag);
 
-        String input = "My name is shraddha.";
+        String input = "My name is xyz.";
         char[] inputArr = input.toCharArray();
         reverseChars(inputArr, 0, input.length() - 1);
         System.out.println(inputArr);
