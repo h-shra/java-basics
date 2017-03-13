@@ -4,7 +4,13 @@ public class StringManipulation {
 
     public static void main(String[] args) {
 
+        System.out.println(inserStar("test"));
+        System.out.println(inserStar("A"));
+
         char[] a = new char[]{0, 0, 0, 0, 0};
+
+        int[] ar = new int[]{2,4,8,10,12,14,16};
+        System.out.println(findMissing(ar));
 
         System.out.println("String related functions");
 
@@ -125,6 +131,25 @@ public class StringManipulation {
         }
     }
 
+    //write a recursion method to insert "*" between each character in a string
+    public static String inserStar(String input) {
+        if (input == null) {
+            return null;
+        }
+        String begin = String.valueOf(input.charAt(0));
+        return prefixStar(begin, input.substring(1,input.length()));
+    }
+
+    private static String prefixStar(String prefix, String postfix) {
+        if (postfix == null || postfix.length()==0) {
+            return prefix;
+        }
+        StringBuilder stringBuilder = new StringBuilder(prefix);
+        stringBuilder.append("*");
+        stringBuilder.append(postfix.charAt(0));
+        return prefixStar(stringBuilder.toString(), postfix.substring(1, postfix.length()));
+    }
+
     // u n i t e d  s t a t e s
 	/*public staic void swapVowels(String input) {
 		char[] inputArr = input.toChatArray();
@@ -142,7 +167,7 @@ public class StringManipulation {
 			}
 		}
 		return String.copyValueOf(inputArr);
-	
+
 	} */
 
     public static double power(double x, int n) {
@@ -171,5 +196,83 @@ public class StringManipulation {
             else
                 return r * r;
         }
+    }
+    public static int findMissing(int[] array) {
+      int length = array.length;
+      int delta = (array[length-1] - array[0])/length;
+      //or
+      delta = Math.min(array[1]-array[0], array[length-1]-array[length-2]);
+
+      return findMissingWithBinary(array, 0, length-1, delta);
+
+    }
+    //2 4 6 8 12
+    public static int findMissingWithBinary(int[] array, int low, int high, int delta) {
+        if (high < low) {
+            return -1;
+        }
+      int mid = (high + low) / 2;
+      if (array[mid] - array[mid -1] > delta) {
+        return array[mid-1] + delta;
+      } else if (array[mid+1] - array[mid] > delta) {
+        return array[mid] + delta;
+      } else if (array[mid] > array[low] + (mid-1) * delta) {
+        return findMissingWithBinary(array, low, mid-1, delta);
+      }
+      return findMissingWithBinary(array, mid+1, high, delta);
+    }
+
+
+    /*public String lookandsay(int n){
+       if (n < 1)
+           return "0";
+       String cur = "1";
+       for (int i = 1; i < n; i++){
+           StringBuilder sb = new StringBuilder();
+		   int count = 1;
+           int pos = 1;
+
+           char c=cur.charAt(0);
+
+           while(pos < cur.length()){
+               if (cur.charAt(pos) == c){
+                   count ++;
+               }
+               else{
+                   sb.append(count);
+                   sb.append(c);
+                   c = cur.charAt(pos);
+                   count = 1;
+               }
+               pos++;
+           }
+           sb.append(count);
+           sb.append(c);
+           cur=sb.toString();
+       }
+       return cur;
+    }
+    */
+//aaabbcccc
+//1, 11, 21, 1211, 111221
+    public static String compress(String input) {
+        StringBuffer output = new StringBuffer();
+        char[] inputChars = input.toCharArray();
+        char last = inputChars[0];
+        int count = 1;
+        //abbbc
+        for (int i=1; i<inputChars.length; i++) {
+            if (last == inputChars[i]) {
+                count++;
+            } else {
+                output.append(last);
+                output.append(count);
+                last = inputChars[i];
+                count = 1;
+            }
+        }
+        output.append(last);
+        output.append(count);
+        return output.toString();
     }
 }
