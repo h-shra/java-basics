@@ -1,5 +1,7 @@
 package string;
 
+import java.util.List;
+
 public class StringManipulation {
 
     public static void main(String[] args) {
@@ -7,9 +9,15 @@ public class StringManipulation {
         System.out.println(inserStar("test"));
         System.out.println(inserStar("A"));
 
+        String[] strings = say_what_you_see(new String[]{"12", "21"});
+        //String[] strings = say_what_you_see(new String[]{});
+
+        for (String s : strings) {
+            System.out.println(s);
+        }
         char[] a = new char[]{0, 0, 0, 0, 0};
 
-        int[] ar = new int[]{2,4,8,10,12,14,16};
+        int[] ar = new int[]{2, 4, 8, 10, 12, 14, 16};
         System.out.println(findMissing(ar));
 
         System.out.println("String related functions");
@@ -137,11 +145,11 @@ public class StringManipulation {
             return null;
         }
         String begin = String.valueOf(input.charAt(0));
-        return prefixStar(begin, input.substring(1,input.length()));
+        return prefixStar(begin, input.substring(1, input.length()));
     }
 
     private static String prefixStar(String prefix, String postfix) {
-        if (postfix == null || postfix.length()==0) {
+        if (postfix == null || postfix.length() == 0) {
             return prefix;
         }
         StringBuilder stringBuilder = new StringBuilder(prefix);
@@ -151,8 +159,8 @@ public class StringManipulation {
     }
 
     // u n i t e d  s t a t e s
-	/*public staic void swapVowels(String input) {
-		char[] inputArr = input.toChatArray();
+    /*public staic void swapVowels(String input) {
+        char[] inputArr = input.toChatArray();
 		int start = 0;
 		int end = input.length() -1;
 		while (start < end) {
@@ -197,29 +205,31 @@ public class StringManipulation {
                 return r * r;
         }
     }
-    public static int findMissing(int[] array) {
-      int length = array.length;
-      int delta = (array[length-1] - array[0])/length;
-      //or
-      delta = Math.min(array[1]-array[0], array[length-1]-array[length-2]);
 
-      return findMissingWithBinary(array, 0, length-1, delta);
+    public static int findMissing(int[] array) {
+        int length = array.length;
+        int delta = (array[length - 1] - array[0]) / length;
+        //or
+        delta = Math.min(array[1] - array[0], array[length - 1] - array[length - 2]);
+
+        return findMissingWithBinary(array, 0, length - 1, delta);
 
     }
+
     //2 4 6 8 12
     public static int findMissingWithBinary(int[] array, int low, int high, int delta) {
         if (high < low) {
             return -1;
         }
-      int mid = (high + low) / 2;
-      if (array[mid] - array[mid -1] > delta) {
-        return array[mid-1] + delta;
-      } else if (array[mid+1] - array[mid] > delta) {
-        return array[mid] + delta;
-      } else if (array[mid] > array[low] + (mid-1) * delta) {
-        return findMissingWithBinary(array, low, mid-1, delta);
-      }
-      return findMissingWithBinary(array, mid+1, high, delta);
+        int mid = (high + low) / 2;
+        if (array[mid] - array[mid - 1] > delta) {
+            return array[mid - 1] + delta;
+        } else if (array[mid + 1] - array[mid] > delta) {
+            return array[mid] + delta;
+        } else if (array[mid] > array[low] + (mid - 1) * delta) {
+            return findMissingWithBinary(array, low, mid - 1, delta);
+        }
+        return findMissingWithBinary(array, mid + 1, high, delta);
     }
 
 
@@ -261,7 +271,7 @@ public class StringManipulation {
         char last = inputChars[0];
         int count = 1;
         //abbbc
-        for (int i=1; i<inputChars.length; i++) {
+        for (int i = 1; i < inputChars.length; i++) {
             if (last == inputChars[i]) {
                 count++;
             } else {
@@ -275,4 +285,51 @@ public class StringManipulation {
         output.append(count);
         return output.toString();
     }
+    
+    /*
+ * Complete the function below.
+ */
+
+    public static String[] say_what_you_see(String[] input_strings) {
+        String[] outputStrings = null;
+        if (input_strings != null) {
+            outputStrings = new String[input_strings.length];
+            for (int j = 0; j<input_strings.length; j++) {
+                char[] array = input_strings[j].toCharArray();
+                char last = array[0];
+                StringBuffer output = new StringBuffer("");
+                int count = 1;
+                for (int i = 1; i < array.length; i++) {
+                    if (last == array[i]) {
+                        count++;
+                    } else {
+                        output.append(count);
+                        output.append(last);
+                        last = array[i];
+                        count = 1;
+                    }
+                }
+                output.append(count);
+                output.append(last);
+                outputStrings[j] = output.toString();
+            }
+        }
+        return outputStrings;
+    }
+
+    static int wordpattern(String pattern, String input) {
+    if (pattern == null) {
+        return 0;
+    }
+    if (input == null) {
+        return 0;
+    }
+    if (input.length() < pattern.length()) {
+        return 0;
+    }
+    int totalWords = pattern.length();
+    return 1;
+    }
+
+
 }

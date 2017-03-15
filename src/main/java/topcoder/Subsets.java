@@ -1,8 +1,10 @@
 package topcoder;
 
+import java.util.ArrayList;
+
 // Write a method to return all subsets of a set.
 public class Subsets {
-    public static void main(Sring args[]) {
+    public static void main(String args[]) {
 
     }
 
@@ -12,7 +14,7 @@ public class Subsets {
             resultSets.add(new ArrayList<Integer>());
             return resultSets;
         } else {
-            resultSets = getSubsets(inputSet, index + 1)
+            resultSets = getSubsets(inputSet, index + 1);
 
         }
         return resultSets;

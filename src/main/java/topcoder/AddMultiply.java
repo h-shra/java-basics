@@ -50,9 +50,7 @@ package topcoder; /**
 
 import java.util.concurrent.ThreadLocalRandom;
 
-Public
-
-class AddMultiply {
+public class AddMultiply {
     public int[] makeExpression(int y) {
         int[] result = new int[3];
         int min = y;
@@ -64,7 +62,7 @@ class AddMultiply {
             min = y - 10;
         }
 
-        int random = ThreadLocalRandom.current.nextInt(min, max + 1);
+        int random = ThreadLocalRandom.current().nextInt(min, max + 1);
 
 
         return result;

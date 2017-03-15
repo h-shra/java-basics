@@ -1,5 +1,7 @@
 package topcoder;
 
+import java.util.List;
+
 /*
 Given a HashMap where the mapping is:
 a => 1
@@ -25,11 +27,11 @@ function("101") = 1
 */
 public class Mapping {
     public int getValidCount(String number) {
-        if (number == 0) {
+        if ("0" == number) {
             return 0;
         }
         //4101 -> [(4, 10, 1), (10,1), (11,1)]
-        List<Set<Integer>> validCombos = getValidNumberCombinations(number);
+        List<Integer> validCombos = getValidNumberCombinations(number);
 
         Integer count = getMappingCount(validCombos);
         return count;
@@ -39,7 +41,7 @@ public class Mapping {
         return null;
     }
 
-    private Intger getMappingCount(List<Integer> combinationList) {
+    private Integer getMappingCount(List<Integer> combinationList) {
         return 0;
     }
 
