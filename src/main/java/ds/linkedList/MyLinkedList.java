@@ -1,5 +1,8 @@
 package ds.linkedList;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MyLinkedList {
 
     protected static Node head = null;
@@ -8,6 +11,7 @@ public class MyLinkedList {
     public static void main(String[] args) {
         int data = 5;
         head = deleteNode(data);
+        head = removeDups();
         addAtEnd(data);
         data = 20;
         addAtFirst(data);
@@ -26,6 +30,16 @@ public class MyLinkedList {
         print();
         head = changeHead(0);
         print();
+        addAtFirst(0);
+        addAtEnd(new Integer(22));
+        addAtEnd(new Integer(22));
+        print();
+        head = removeDups();
+        print();
+        addAtEnd(new Integer(9));
+        addAtEnd(new Integer(9));
+        print();
+        System.out.println(returnNthFromLast(3).data);
     }
 
 
@@ -91,7 +105,7 @@ public class MyLinkedList {
             System.out.println("No node to delete");
         } else {
             ntd.data = ntd.next.data;
-            ntd.next = ntd.next;
+            ntd.next = ntd.next.next;
         }
     }
 
@@ -144,6 +158,71 @@ public class MyLinkedList {
         }
         temp.next = head;
         return newHead;
+    }
+
+    //Write code to remove duplicates from an unsorted linked list.
+    public static Node removeDups() {
+        if (head != null) {
+            Node current = head;
+            Map<Integer, Integer> map = new HashMap<>(); //Set<Integer> more suitable
+            map.put(current.data, current.data);
+
+            while (current.next != null) {
+                if (map.containsKey(current.next.data)) {
+                    //found the dup, leave it out
+                    current.next = current.next.next;
+                } else {
+                    map.put(current.data, current.data);
+                    current = current.next;
+                }
+            }
+        }
+        return head;
+    }
+
+    /*
+    * Return 3rd from last element
+    *
+    * 0-> 22-> 5->20-> 1->23-> 9-> 9-> NULL
+    * 0                   3   2   Last>NULL
+    *
+    * F,S
+    * F   S
+    * F       S
+    * F           S                     //after for ends, F=0, S=2
+    *     F           S
+    *         F           S
+    *             F           S
+    *                 F           S
+    *                     F           S//after while ends, F=3rd last, S=null
+    * */
+
+    public static Node returnNthFromLast (int n) {
+        if (head == null) {
+            System.out.println("LL length less than "+n);
+            return null;
+        }
+
+        Node first = head;
+        Node second = head;
+
+        //difference between first and second's position should be equal to n
+        for (int i = 0; i < n; i++ ) {
+            if (second != null) {
+                second = second.next;
+            } else {
+                System.out.println("LL length less than "+n);
+                return null;
+            }
+        }
+
+        System.out.println("Second at " +second.data );
+        while (second != null) {
+            second = second.next;
+            first = first.next;
+        }
+
+        return first;
     }
 
 

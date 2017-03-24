@@ -15,4 +15,18 @@ public class BubbleSort {
             }
         }
     }
+
+    public void bubbleSortAscending(int[] toSort) {
+
+        for (int i =0; i < toSort.length - 1; i++) {
+            for (int j = 1; j < toSort.length-i; j++) {
+                if (toSort[j-1] > toSort[j]) {
+                    int temp = toSort[j-1];
+                    toSort[j-1] = toSort[j];
+                    toSort[j] = temp;
+                }
+            }
+        }
+
+    }
 }

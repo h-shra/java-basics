@@ -1,28 +1,26 @@
 package string;
 
-import java.util.List;
-
 public class StringManipulation {
 
     public static void main(String[] args) {
 
-        System.out.println(inserStar("test"));
-        System.out.println(inserStar("A"));
+        /*System.out.println(insertStar("test"));
+        System.out.println(insertStar("A"));
 
-        String[] strings = say_what_you_see(new String[]{"12", "21"});
-        //String[] strings = say_what_you_see(new String[]{});
+        String[] strings = say_what_you_see(new String[] { "12", "21" });
+        // String[] strings = say_what_you_see(new String[]{});
 
         for (String s : strings) {
             System.out.println(s);
         }
-        char[] a = new char[]{0, 0, 0, 0, 0};
+        char[] a = new char[] { 0, 0, 0, 0, 0 };
 
-        int[] ar = new int[]{2, 4, 8, 10, 12, 14, 16};
+        int[] ar = new int[] { 2, 4, 8, 10, 12, 14, 16 };
         System.out.println(findMissing(ar));
 
         System.out.println("String related functions");
 
-        boolean flag = hasUniqueChars("shra");
+        boolean flag = hasUniqueChars("testme");
         System.out.println(flag);
 
         flag = hasUniqueChars("abc101");
@@ -31,22 +29,24 @@ public class StringManipulation {
         String input = "My name is xyz.";
         char[] inputArr = input.toCharArray();
         reverseChars(inputArr, 0, input.length() - 1);
-        System.out.println(inputArr);
-
+        System.out.println(inputArr); */
+        String input = "My name is xyz.";
         input = reverseWords(input);
         System.out.println(input);
 
-        System.out.println(getAsciiCode('.'));
+        /*System.out.println(getAsciiCode('.'));
         System.out.println(getAsciiCode('0'));
         System.out.println(getAsciiCode('9'));
 
         System.out.println(isValidNumber("127875.55"));
         System.out.println(isValidNumber("127875.55a"));
 
-        //double ans = power(2,3);
+        // double ans = power(2,3);
         double ans = power(2, 4);
         ans = hoch(2, 3);
         System.out.println(ans);
+
+        permutation("test");*/
     }
 
     public static boolean hasUniqueChars(String input) {
@@ -59,7 +59,7 @@ public class StringManipulation {
 
         for (int i = 0; i < input.length(); i++) {
             int asciiValue = input.charAt(i);
-            if (charSet[asciiValue] == true) {
+            if (charSet[asciiValue]) {
                 return false;
             } else {
                 charSet[asciiValue] = true;
@@ -68,11 +68,12 @@ public class StringManipulation {
         return true;
     }
 
+    //O(n/2)
     public static void reverseChars(char[] inputArray, int start, int end) {
 
-        //when only input is String input, add following
-        //char[] inputArray = input.toCharArray();
-        //reverseChars(inputArr, 0, input.length() - 1);
+        // when only input is String input, add following
+        // char[] inputArray = input.toCharArray();
+        // reverseChars(inputArr, 0, input.length() - 1);
         char temp;
         while (end > start) {
             temp = inputArray[start];
@@ -93,8 +94,8 @@ public class StringManipulation {
         end = 0;
         while (end < length) {
             if (inputArray[end] != ' ') {
-                start = end; //save the reversed start
-                //go to the end of word
+                start = end; // save the reversed start
+                // go to the end of word
                 while (end < length && inputArray[end] != ' ') {
                     end++;
                 }
@@ -116,13 +117,12 @@ public class StringManipulation {
         for (int i = 0; i < length; i++) {
             int ascii = inputArray[i];
             if ((ascii >= 48 && ascii <= 57) || (ascii == 46)) {
-                continue;
-            }/* else if(decimalPtCount > 1)
-                return false;*/
+            }/*
+              * else if(decimalPtCount > 1) return false;
+              */
         }
         return true;
     }
-
 
     public static void permutation(String str) {
         permutation("", str);
@@ -130,17 +130,19 @@ public class StringManipulation {
 
     private static void permutation(String prefix, String str) {
         int n = str.length();
-        if (n == 0)
+        if (n == 0) {
             System.out.println(prefix);
+        }
         else {
             for (int i = 0; i < n; i++)
                 permutation(prefix + str.charAt(i),
-                        str.substring(0, i) + str.substring(i + 1, n));
+                            str.substring(0, i) + str.substring(i + 1, n));
         }
+
     }
 
-    //write a recursion method to insert "*" between each character in a string
-    public static String inserStar(String input) {
+    // write a recursion method to insert "*" between each character in a string
+    public static String insertStar(String input) {
         if (input == null) {
             return null;
         }
@@ -152,31 +154,41 @@ public class StringManipulation {
         if (postfix == null || postfix.length() == 0) {
             return prefix;
         }
-        StringBuilder stringBuilder = new StringBuilder(prefix);
-        stringBuilder.append("*");
-        stringBuilder.append(postfix.charAt(0));
-        return prefixStar(stringBuilder.toString(), postfix.substring(1, postfix.length()));
+        StringBuilder newPrefix = new StringBuilder(prefix);
+        newPrefix.append("*");
+        newPrefix.append(postfix.charAt(0));
+        return prefixStar(newPrefix.toString(), postfix.substring(1, postfix.length()));
     }
 
-    // u n i t e d  s t a t e s
-    /*public staic void swapVowels(String input) {
-        char[] inputArr = input.toChatArray();
-		int start = 0;
-		int end = input.length() -1;
-		while (start < end) {
-			if ( isVowel(inputArr[start]) && isVowel(inputArr[end]) ) {
-				swapChars(inputArr[start], inputArr[end]);
-				start ++;
-				end --;
-			} else if (!isVowel(inputArr[start])) {
-				start++;
-			} else if (!isVowel(inputArr[end])) {
-				end--;
-			}
-		}
-		return String.copyValueOf(inputArr);
+    // u n i t e d s t a t e s
+    public String swapVowels(String input) {
+        char[] inputArr = input.toCharArray();
+        int start = 0;
+        int end =
+                input.length() - 1;
+        while (start < end) {
+            if (isVowel(inputArr[start]) && isVowel(inputArr[end])) {
+                swapChars(inputArr[start], inputArr[end]);
+                start++;
+                end--;
+            } else if (!isVowel(inputArr[start])) {
+                start++;
+            }
+            else if (!isVowel(inputArr[end])) {
+                end--;
+            }
+        }
+        return String.copyValueOf(inputArr);
 
-	} */
+    }
+
+    private boolean isVowel(char c) {
+        return false;
+    }
+
+    private void swapChars(char c, char c1) {
+        
+    }
 
     public static double power(double x, int n) {
 
@@ -208,15 +220,15 @@ public class StringManipulation {
 
     public static int findMissing(int[] array) {
         int length = array.length;
-        int delta = (array[length - 1] - array[0]) / length;
-        //or
-        delta = Math.min(array[1] - array[0], array[length - 1] - array[length - 2]);
+        //int delta = (array[length - 1] - array[0]) / length;
+        // or
+        int delta = Math.min(array[1] - array[0], array[length - 1] - array[length - 2]);
 
         return findMissingWithBinary(array, 0, length - 1, delta);
 
     }
 
-    //2 4 6 8 12
+    // 2 4 6 8 12
     public static int findMissingWithBinary(int[] array, int low, int high, int delta) {
         if (high < low) {
             return -1;
@@ -232,45 +244,23 @@ public class StringManipulation {
         return findMissingWithBinary(array, mid + 1, high, delta);
     }
 
-
-    /*public String lookandsay(int n){
-       if (n < 1)
-           return "0";
-       String cur = "1";
-       for (int i = 1; i < n; i++){
-           StringBuilder sb = new StringBuilder();
-		   int count = 1;
-           int pos = 1;
-
-           char c=cur.charAt(0);
-
-           while(pos < cur.length()){
-               if (cur.charAt(pos) == c){
-                   count ++;
-               }
-               else{
-                   sb.append(count);
-                   sb.append(c);
-                   c = cur.charAt(pos);
-                   count = 1;
-               }
-               pos++;
-           }
-           sb.append(count);
-           sb.append(c);
-           cur=sb.toString();
-       }
-       return cur;
-    }
-    */
-//aaabbcccc
-//1, 11, 21, 1211, 111221
+    /*
+     * public String lookandsay(int n){ if (n < 1) return "0"; String cur = "1"; for (int i = 1; i < n; i++){
+     * StringBuilder sb = new StringBuilder(); int count = 1; int pos = 1;
+     * 
+     * char c=cur.charAt(0);
+     * 
+     * while(pos < cur.length()){ if (cur.charAt(pos) == c){ count ++; } else{ sb.append(count); sb.append(c); c =
+     * cur.charAt(pos); count = 1; } pos++; } sb.append(count); sb.append(c); cur=sb.toString(); } return cur; }
+     */
+    // aaabbcccc
+    // 1, 11, 21, 1211, 111221
     public static String compress(String input) {
         StringBuffer output = new StringBuffer();
         char[] inputChars = input.toCharArray();
         char last = inputChars[0];
         int count = 1;
-        //abbbc
+        // abbbc
         for (int i = 1; i < inputChars.length; i++) {
             if (last == inputChars[i]) {
                 count++;
@@ -285,16 +275,12 @@ public class StringManipulation {
         output.append(count);
         return output.toString();
     }
-    
-    /*
- * Complete the function below.
- */
 
     public static String[] say_what_you_see(String[] input_strings) {
         String[] outputStrings = null;
         if (input_strings != null) {
             outputStrings = new String[input_strings.length];
-            for (int j = 0; j<input_strings.length; j++) {
+            for (int j = 0; j < input_strings.length; j++) {
                 char[] array = input_strings[j].toCharArray();
                 char last = array[0];
                 StringBuffer output = new StringBuffer("");
@@ -316,20 +302,4 @@ public class StringManipulation {
         }
         return outputStrings;
     }
-
-    static int wordpattern(String pattern, String input) {
-    if (pattern == null) {
-        return 0;
-    }
-    if (input == null) {
-        return 0;
-    }
-    if (input.length() < pattern.length()) {
-        return 0;
-    }
-    int totalWords = pattern.length();
-    return 1;
-    }
-
-
 }
