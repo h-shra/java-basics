@@ -2,7 +2,7 @@ package questions;
 
 public class FixedSizeQ {
 
-    int[] queue = new int[] { Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
+    int[] queue = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
     int start = 0;
     int end = 0;
 
@@ -42,7 +42,7 @@ public class FixedSizeQ {
     }
 
     public void enqueue(int value) {
-        if (end != queue.length && queue[end]==Integer.MAX_VALUE) {
+        if (end != queue.length && queue[end] == Integer.MAX_VALUE) {
             queue[end] = value;
             end++;
         } else if (end == queue.length) {
@@ -79,7 +79,7 @@ public class FixedSizeQ {
     }
 
     public void print() {
-        System.out.println("Start:" + start + " End:" +(end-1));
+        System.out.println("Start:" + start + " End:" + (end - 1));
         for (int value : queue) {
             System.out.println(value);
         }

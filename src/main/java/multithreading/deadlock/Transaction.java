@@ -26,7 +26,8 @@ public class Transaction {
         };
 
         //Consider both transaction requests are submitted at the same time
-        aliceThread.start();    bobThread.start();
+        aliceThread.start();
+        bobThread.start();
 
 
         /*Scenario 2*/

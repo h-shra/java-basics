@@ -17,15 +17,16 @@ public abstract class MyList implements List<Integer> {
             this.currentIndex = list.start;
             this.myList = list;
         }
+
         @Override
         public boolean hasNext() {
-            return currentIndex < listSize-1;
+            return currentIndex < listSize - 1;
         }
 
         @Override
         public Integer next() {
             if (hasNext()) {
-                return myList.get(currentIndex ++);
+                return myList.get(currentIndex++);
             } else
                 throw new NoSuchElementException("eol");
         }

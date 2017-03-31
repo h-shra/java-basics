@@ -4,19 +4,8 @@ public class QueueWithList {
 
     QueueNode first, last;
 
-    public class QueueNode {
-        QueueNode next;
-        int data;
-
-        public QueueNode(int data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
-
     public void enqueue(int item) {
-        if(first == null){
+        if (first == null) {
             first = new QueueNode(item);
             last = first;
         } else {
@@ -46,6 +35,16 @@ public class QueueWithList {
                 temp = temp.next;
             }
 
+        }
+    }
+
+    public class QueueNode {
+        QueueNode next;
+        int data;
+
+        public QueueNode(int data) {
+            this.data = data;
+            this.next = null;
         }
     }
 }

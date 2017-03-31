@@ -178,7 +178,7 @@ public class MyBST {
     }
 
     public static int size(TreeNode root, int level) {
-        if (root == null ){
+        if (root == null) {
             return 0;
         }
         TreeNode tempLeft = root;
@@ -186,12 +186,12 @@ public class MyBST {
 
         int currentLevel = 1;
         while (currentLevel <= level) {
-            if(tempLeft !=null) {
+            if (tempLeft != null) {
                 tempLeft = tempLeft.left;
             }
             if (tempRight != null) {
                 tempRight = tempRight.right;
-                currentLevel ++;
+                currentLevel++;
             }
         }
 

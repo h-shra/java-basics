@@ -1,10 +1,6 @@
 package ds.bst;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class BinarySearchTree {
 
@@ -13,7 +9,7 @@ public class BinarySearchTree {
     public static void main(String[] args) {
         List<Integer> treeList =
                 Arrays.asList(1, 5, 2, 7, 0);
-                //Arrays.asList(8, 5, 4, 9, 7, 11, 1, 12, 3, 2);
+        //Arrays.asList(8, 5, 4, 9, 7, 11, 1, 12, 3, 2);
 
         BinarySearchTree bst = new BinarySearchTree();
         for (int i : treeList) {
@@ -119,9 +115,9 @@ public class BinarySearchTree {
             if (current != null) {
                 System.out.println(current.data);
                 for (TreeNode node : getChildNodes(current)) {
-                    if (node!= null && !node.visited) {
-                            node.visited = true;
-                            queue.add(node);
+                    if (node != null && !node.visited) {
+                        node.visited = true;
+                        queue.add(node);
                     }
                 }
             }

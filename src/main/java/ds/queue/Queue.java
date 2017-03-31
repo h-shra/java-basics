@@ -6,7 +6,7 @@ class Queue {
     Node first, last;
 
     public void enqueue(int item) {
-        if(first == null){
+        if (first == null) {
             first = new Node(item);
             last = first;
         } else {

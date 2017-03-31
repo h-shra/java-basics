@@ -1,6 +1,6 @@
 package basics;
 
-public interface ExtendedMyInterface extends MyInterface{
+public interface ExtendedMyInterface extends MyInterface {
 
     int VARIABLE = 0;
 
@@ -11,7 +11,7 @@ public interface ExtendedMyInterface extends MyInterface{
 
     //OR I can do this so the behaviour of default method can be changed by my subclass
     //which means it is no longer a default method
-   // void defaultMethodWithBody();
+    // void defaultMethodWithBody();
 
     void doThisAsWell();
 }

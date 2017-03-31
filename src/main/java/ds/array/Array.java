@@ -1,10 +1,6 @@
 package ds.array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Array {
 
@@ -19,7 +15,7 @@ public class Array {
 
         // System.out.println(array.binarySearchInSmaller(new Integer[] {1, 4, 5, 8, 9}, 9));
 
-        array.findPairs(new int[] {1, 4, 45, 6, 10, -8, 1}, 2);
+        array.findPairs(new int[]{1, 4, 45, 6, 10, -8, 1}, 2);
         array.findPairsWithSet(new int[]{3, 7, 4, 0, 10, 99, 7, 14}, 7);
 
     }

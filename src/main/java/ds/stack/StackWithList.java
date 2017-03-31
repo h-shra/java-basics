@@ -4,16 +4,6 @@ public class StackWithList {
 
     StackNode top = null;
 
-    private class StackNode {
-        StackNode next;
-        int data;
-
-        public StackNode (int data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
     public static void main(String[] args) {
         StackWithList stack = new StackWithList();
         System.out.println(stack.isEmpty());
@@ -30,7 +20,7 @@ public class StackWithList {
         stack.print();
     }
 
-    public void push (int i) {
+    public void push(int i) {
         if (top == null) {
             StackNode firstOne = new StackNode(i);
             top = firstOne;
@@ -41,7 +31,7 @@ public class StackWithList {
         }
     }
 
-    public int pop () {
+    public int pop() {
         if (top == null) {
             System.out.println("Cannot pop from empty stack");
             return -1; //error
@@ -64,7 +54,7 @@ public class StackWithList {
             System.out.println("Empty stack");
         } else {
             StackNode temp = top;
-            while (temp!=null) {
+            while (temp != null) {
                 System.out.println(temp.data);
                 temp = temp.next;
             }
@@ -72,10 +62,20 @@ public class StackWithList {
     }
 
     public boolean isEmpty() {
-        if (top==null) {
+        if (top == null) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private class StackNode {
+        StackNode next;
+        int data;
+
+        public StackNode(int data) {
+            this.data = data;
+            this.next = null;
         }
     }
 

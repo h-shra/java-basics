@@ -15,7 +15,7 @@ public class CircularQueue {
     int end = 0;
 
     public CircularQueue(int size) {
-        queue = new Integer[size+1];
+        queue = new Integer[size + 1];
         //allocate +1 if you fully want to utilize requested size
     }
 
@@ -36,17 +36,17 @@ public class CircularQueue {
         } else {
             Integer item = queue[start];
             queue[start] = null;
-            start = (start+1) % queue.length;
+            start = (start + 1) % queue.length;
             return item;
         }
     }
 
     private void enqueue(int item) {
         if (isFull()) {
-            System.out.println("Circular Q full. Cannot insert " +item);
+            System.out.println("Circular Q full. Cannot insert " + item);
         } else {
             queue[end] = item;
-            end = (end+1) % queue.length;
+            end = (end + 1) % queue.length;
         }
 
     }
@@ -59,7 +59,7 @@ public class CircularQueue {
     }
 
     private boolean isFull() {
-        if (start == (end+1) % queue.length) {
+        if (start == (end + 1) % queue.length) {
             return true;
         }
         return false;

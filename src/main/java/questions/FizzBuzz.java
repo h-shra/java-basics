@@ -13,11 +13,11 @@ public class FizzBuzz {
     }
 
     private String calculate(int number) {
-        if (number % 3 == 0 && number%5 ==0) {
+        if (number % 3 == 0 && number % 5 == 0) {
             return "fizzbuzz";
-        } else if (number %3 == 0) {
+        } else if (number % 3 == 0) {
             return "fizz";
-        } else if (number %5 ==0) {
+        } else if (number % 5 == 0) {
             return "buzz";
         } else {
             return new Integer(number).toString();

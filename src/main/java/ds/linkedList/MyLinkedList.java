@@ -197,9 +197,9 @@ public class MyLinkedList {
     *                     F           S//after while ends, F=3rd last, S=null
     * */
 
-    public static Node returnNthFromLast (int n) {
+    public static Node returnNthFromLast(int n) {
         if (head == null) {
-            System.out.println("LL length less than "+n);
+            System.out.println("LL length less than " + n);
             return null;
         }
 
@@ -207,16 +207,16 @@ public class MyLinkedList {
         Node second = head;
 
         //difference between first and second's position should be equal to n
-        for (int i = 0; i < n; i++ ) {
+        for (int i = 0; i < n; i++) {
             if (second != null) {
                 second = second.next;
             } else {
-                System.out.println("LL length less than "+n);
+                System.out.println("LL length less than " + n);
                 return null;
             }
         }
 
-        System.out.println("Second at " +second.data );
+        System.out.println("Second at " + second.data);
         while (second != null) {
             second = second.next;
             first = first.next;

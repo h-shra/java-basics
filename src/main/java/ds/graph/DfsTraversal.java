@@ -52,9 +52,9 @@ public class DfsTraversal extends Traversal {
 
         while (!stack.isEmpty()) {
             GraphNode current = stack.pop();
-            if (current!=null) {
+            if (current != null) {
                 for (GraphNode n : current.connectedNodes) {
-                    if (n!=null && !n.visited) {
+                    if (n != null && !n.visited) {
                         System.out.println(n.data);
                         if (n.data == value) {
                             return true;

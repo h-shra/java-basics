@@ -3,19 +3,8 @@ package ds.graph;
 public class Queue<Node> {
     QueueNode first, last;
 
-    public class QueueNode {
-        QueueNode next;
-        Node data;
-
-        public QueueNode(Node data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
-
     public void enqueue(Node item) {
-        if(first == null){
+        if (first == null) {
             first = new QueueNode(item);
             last = first;
         } else {
@@ -40,5 +29,15 @@ public class Queue<Node> {
             return true;
         }
         return false;
+    }
+
+    public class QueueNode {
+        QueueNode next;
+        Node data;
+
+        public QueueNode(Node data) {
+            this.data = data;
+            this.next = null;
+        }
     }
 }

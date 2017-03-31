@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GraphNode {
-    List<GraphNode> connectedNodes;
     final Integer data;
+    List<GraphNode> connectedNodes;
     boolean visited;
 
     public GraphNode(Integer data) {

@@ -4,7 +4,7 @@ public class MergeSort {
 
     public static void main(String[] args) {
         MergeSort sort = new MergeSort();
-        int[] input = new int[] { 55, 2, 3, 8, 11, 99, 0 };
+        int[] input = new int[]{55, 2, 3, 8, 11, 99, 0};
         sort.mergeSort(input);
         for (int i : input) {
             System.out.println(i);

@@ -132,11 +132,10 @@ public class StringManipulation {
         int n = str.length();
         if (n == 0) {
             System.out.println(prefix);
-        }
-        else {
+        } else {
             for (int i = 0; i < n; i++)
                 permutation(prefix + str.charAt(i),
-                            str.substring(0, i) + str.substring(i + 1, n));
+                        str.substring(0, i) + str.substring(i + 1, n));
         }
 
     }
@@ -158,36 +157,6 @@ public class StringManipulation {
         newPrefix.append("*");
         newPrefix.append(postfix.charAt(0));
         return prefixStar(newPrefix.toString(), postfix.substring(1, postfix.length()));
-    }
-
-    // u n i t e d s t a t e s
-    public String swapVowels(String input) {
-        char[] inputArr = input.toCharArray();
-        int start = 0;
-        int end =
-                input.length() - 1;
-        while (start < end) {
-            if (isVowel(inputArr[start]) && isVowel(inputArr[end])) {
-                swapChars(inputArr[start], inputArr[end]);
-                start++;
-                end--;
-            } else if (!isVowel(inputArr[start])) {
-                start++;
-            }
-            else if (!isVowel(inputArr[end])) {
-                end--;
-            }
-        }
-        return String.copyValueOf(inputArr);
-
-    }
-
-    private boolean isVowel(char c) {
-        return false;
-    }
-
-    private void swapChars(char c, char c1) {
-        
     }
 
     public static double power(double x, int n) {
@@ -247,9 +216,9 @@ public class StringManipulation {
     /*
      * public String lookandsay(int n){ if (n < 1) return "0"; String cur = "1"; for (int i = 1; i < n; i++){
      * StringBuilder sb = new StringBuilder(); int count = 1; int pos = 1;
-     * 
+     *
      * char c=cur.charAt(0);
-     * 
+     *
      * while(pos < cur.length()){ if (cur.charAt(pos) == c){ count ++; } else{ sb.append(count); sb.append(c); c =
      * cur.charAt(pos); count = 1; } pos++; } sb.append(count); sb.append(c); cur=sb.toString(); } return cur; }
      */
@@ -301,5 +270,34 @@ public class StringManipulation {
             }
         }
         return outputStrings;
+    }
+
+    // u n i t e d s t a t e s
+    public String swapVowels(String input) {
+        char[] inputArr = input.toCharArray();
+        int start = 0;
+        int end =
+                input.length() - 1;
+        while (start < end) {
+            if (isVowel(inputArr[start]) && isVowel(inputArr[end])) {
+                swapChars(inputArr[start], inputArr[end]);
+                start++;
+                end--;
+            } else if (!isVowel(inputArr[start])) {
+                start++;
+            } else if (!isVowel(inputArr[end])) {
+                end--;
+            }
+        }
+        return String.copyValueOf(inputArr);
+
+    }
+
+    private boolean isVowel(char c) {
+        return false;
+    }
+
+    private void swapChars(char c, char c1) {
+
     }
 }

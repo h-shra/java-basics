@@ -1,6 +1,6 @@
 package basics;
 
-public class MyInterfaceImpl implements MyInterface{
+public class MyInterfaceImpl implements MyInterface {
     public static void main(String[] args) {
         MyInterfaceImpl impl = new MyInterfaceImpl();
         //Can't do this

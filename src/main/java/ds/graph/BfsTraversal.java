@@ -43,7 +43,7 @@ public class BfsTraversal extends Traversal {
         queue.enqueue(startNode);
         while (!queue.isEmpty()) {
             GraphNode current = (GraphNode) queue.dequeue();
-            if (current!=null) {
+            if (current != null) {
                 System.out.println(current.data);
                 for (GraphNode node : current.connectedNodes) {
                     if (!node.visited) {
@@ -66,7 +66,7 @@ public class BfsTraversal extends Traversal {
         queue.enqueue(startNode);
         while (!queue.isEmpty()) {
             GraphNode current = (GraphNode) queue.dequeue();
-            if (current!=null) {
+            if (current != null) {
                 System.out.println(current.data);
                 for (GraphNode node : current.connectedNodes) {
                     if (!node.visited) {
