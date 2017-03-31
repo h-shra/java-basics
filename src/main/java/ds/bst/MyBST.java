@@ -20,9 +20,9 @@ public class MyBST {
         System.out.println("Size of the BST : " + size(myRoot, 2));
 
         /*System.out.println("Max depth of the BST : " + maxDepth(myRoot));
-        System.out.println("Minimum node in BST : " + min(myRoot).value);
-        System.out.println("Maximum node in BST : " + max(myRoot).value);
-        System.out.println("Least common ancestor of 110 and 175 : " + leastCommonAncestor(myRoot, 110, 175).value);
+        System.out.println("Minimum node in BST : " + min(myRoot).data);
+        System.out.println("Maximum node in BST : " + max(myRoot).data);
+        System.out.println("Least common ancestor of 110 and 175 : " + leastCommonAncestor(myRoot, 110, 175).data);
         System.out.println("Preorder");
         preorderTraversal(myRoot);
         System.out.println("Is BSTrecursive? : " + isBstRecurse(myRoot));*/
@@ -61,25 +61,25 @@ public class MyBST {
     public static TreeNode insert(TreeNode root, int val) {
         TreeNode current = root;
         if (current == null) {
-            current = new TreeNode(val, null, null);
+            current = new TreeNode(val);
             root = current;
         } else {
             TreeNode temp = null;
             while (current != null) {
                 temp = current;
-                if (current.value > val) {
+                if (current.data > val) {
                     current = current.left;
-                } else if (current.value < val) {
+                } else if (current.data < val) {
                     current = current.right;
                 } else {
                     System.out.println("Node " + val + " already present");
                     return root;
                 }
             }
-            if (temp.value > val) {
-                temp.left = new TreeNode(val, null, null);
+            if (temp.data > val) {
+                temp.left = new TreeNode(val);
             } else {
-                temp.right = new TreeNode(val, null, null);
+                temp.right = new TreeNode(val);
             }
         }
         return root;
@@ -88,11 +88,11 @@ public class MyBST {
     // recursive insert. Average O(log(n)). Worst O(n)
     public static TreeNode recInsert(TreeNode root, int val) {
         if (root == null) {
-            return new TreeNode(val, null, null);
+            return new TreeNode(val);
         }
-        if (root.value > val) {
+        if (root.data > val) {
             root.left = recInsert(root.left, val);
-        } else if (root.value < val) {
+        } else if (root.data < val) {
             root.right = recInsert(root.right, val);
         } else {
             System.out.println("Node" + val + "already present");
@@ -103,10 +103,10 @@ public class MyBST {
     // Non-recursive lookup - O(log(n))
     public static TreeNode lookup(TreeNode root, int val) {
         while (root != null) {
-            if (root.value == val) {
+            if (root.data == val) {
                 return root;
             }
-            if (root.value > val) {
+            if (root.data > val) {
                 root = root.left;
             } else {
                 root = root.right;
@@ -120,10 +120,10 @@ public class MyBST {
         if (root == null) {
             return root;
         } else {
-            if (root.value == val) {
+            if (root.data == val) {
                 return root;
             }
-            if (root.value > val) {
+            if (root.data > val) {
                 return recLookUp(root.left, val);
             } else {
                 return recLookUp(root.right, val);
@@ -133,7 +133,7 @@ public class MyBST {
 
     // helper method
     private static void printTreeNode(TreeNode node) {
-        System.out.println(node.value);
+        System.out.println(node.data);
     }
 
     // pre-order traversal O(n)
@@ -243,7 +243,7 @@ public class MyBST {
     public static TreeNode leastCommonAncestor(TreeNode root, int val1, int val2) {
         TreeNode current = root;
         while (current != null) {
-            int value = current.value;
+            int value = current.data;
             if (value > val1 && value > val2) {
                 current = current.left;
             }
@@ -265,12 +265,12 @@ public class MyBST {
         if (node == null) {
             return true; // has to be true
         }
-        if ((minValue != Integer.MIN_VALUE && node.value < minValue)
-                || (maxValue != Integer.MAX_VALUE && node.value > maxValue)) {
+        if ((minValue != Integer.MIN_VALUE && node.data < minValue)
+                || (maxValue != Integer.MAX_VALUE && node.data > maxValue)) {
             return false;
         }
-        if (!isBstRecurse(node.left, minValue, node.value) ||
-                !isBstRecurse(node.right, node.value, maxValue)) {
+        if (!isBstRecurse(node.left, minValue, node.data) ||
+                !isBstRecurse(node.right, node.data, maxValue)) {
             return false;
         }
         return true;
@@ -295,7 +295,7 @@ public class MyBST {
         }
         TreeNode current = root;
         while (current.right != null) {
-            if (current.value < current.right.value) {
+            if (current.data < current.right.data) {
                 current = root.right;
             } else {
                 return false;
@@ -310,7 +310,7 @@ public class MyBST {
         }
         TreeNode current = root;
         while (current.left != null) {
-            if (current.value > current.left.value) {
+            if (current.data > current.left.data) {
                 current = root.left;
             } else {
                 return false;

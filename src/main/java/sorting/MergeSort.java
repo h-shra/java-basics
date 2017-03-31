@@ -4,57 +4,56 @@ public class MergeSort {
 
     public static void main(String[] args) {
         MergeSort sort = new MergeSort();
-        int[] input = new int[] {55,2,3,8,11,99,0};
+        int[] input = new int[] { 55, 2, 3, 8, 11, 99, 0 };
         sort.mergeSort(input);
         for (int i : input) {
             System.out.println(i);
         }
     }
 
-    //O(n log n)
+    // O(n log n)
     private void mergeSort(int[] array) {
-        doSort(array, 0, array.length - 1);
+        sort(array, 0, array.length - 1);
     }
 
-    private void doSort(int[] array, int low, int high) {
+    public void sort(int[] array, int low, int high) {
+
         if (low < high) {
             int mid = low + (high - low) / 2;
-            doSort(array, low, mid);
-            doSort(array, mid + 1, high);
+            sort(array, low, mid);
+            sort(array, mid + 1, high);
             merge(array, low, mid, high);
         }
-
     }
 
-    private void merge(int[] array, int low, int mid, int high) {
-        int[] helper = new int[array.length];
-        // Copy both parts into the helper array
+    public void merge(int[] array, int low, int mid, int high) {
+
+        int[] temp = new int[array.length];
+
         for (int i = low; i <= high; i++) {
-            helper[i] = array[i];
+            temp[i] = array[i];
         }
 
+        int current = low;
         int i = low;
         int j = mid + 1;
-        int k = low;
-        // Copy the smallest values from either the left or the right side back
-        // to the original array
-
         while (i <= mid && j <= high) {
-            if (helper[i] <= helper[j]) {
-                array[k] = helper[i];
+            if (temp[i] <= temp[j]) {
+                array[current] = temp[i];
                 i++;
             } else {
-                array[k] = helper[j];
+                array[current] = temp[j];
                 j++;
             }
-            k++;
+            current++;
         }
-        // Copy the rest of the left side of the array into the target array
+
         while (i <= mid) {
-            array[k] = helper[i];
-            k++;
+            array[current] = temp[i];
             i++;
+            current++;
         }
+
     }
 
 }
