@@ -6,25 +6,28 @@ public class Array {
 
     public static void main(String[] args) {
         Array array = new Array();
-        // array.union(new int[] {1, 3, 4, 5, 7}, new int[]{2, 3, 5, 6});
-        // array.intersect(new int[] {1, 3, 4, 5, 7}, new int[]{2, 3, 5, 6});
+        //sorted
+        array.intersectOnSortedArrays(new int[]{1, 3, 4, 5, 7}, new int[]{2, 3, 5, 6});
+        array.unionOnSortedArrays(new int[]{1, 3, 4, 5, 7}, new int[]{2, 3, 5, 6});
+        array.unionOnSortedArrays(new int[]{1, 3}, new int[]{2, 3, 5, 6});
+        array.unionOnSortedArrays(new int[]{1, 2, 2, 2, 2, 2, 2, 3, 6, 6, 6, 6, 6, 6}, new int[]{2, 2, 3, 6, 6,});
+        //unsorted
+        array.unsortedUnion(new Integer[]{1, 3, 4, 5, 7}, new Integer[]{2, 3, 5, 6});
+        array.unsortedIntersect(new Integer[]{1, 3, 4, 5, 7}, new Integer[]{2, 3, 5, 6});
 
-        // array.union(new int[] {1,2,2,2,2,2,2,3,6,6,6,6,6,6}, new int[]{2,2,3,6,6,});
-        // array.unsortedUnion(new Integer[] {1, 3, 4, 5, 7}, new Integer[]{2, 3, 5, 6});
-        //array.unsortedIntersect(new Integer[] { 1, 3, 4, 5, 7 }, new Integer[] { 2, 3, 5, 6 });
+        System.out.println(array.binarySearch(new Integer[]{1, 4, 5, 8, 9}, 9));
 
-        // System.out.println(array.binarySearchInSmaller(new Integer[] {1, 4, 5, 8, 9}, 9));
-
-        array.findPairs(new int[]{1, 4, 45, 6, 10, -8, 1}, 2);
+        array.findPairs(new int[]{1, 4, 45, 6, 10, -8, 1, 0}, 10);
         array.findPairsWithSet(new int[]{3, 7, 4, 0, 10, 99, 7, 14}, 7);
 
     }
 
-    public void union(int[] a, int[] b) {
+    public void unionOnSortedArrays(int[] a, int[] b) {
         if (a != null || b != null) {
 
             int i = 0;
             int j = 0;
+            System.out.println("Union: ");
             while (i < a.length && j < b.length) {
                 if (a[i] < b[j]) {
                     System.out.println(a[i]);
@@ -42,8 +45,7 @@ public class Array {
                 for (int k = i; k < a.length; k++) {
                     System.out.println(a[k]);
                 }
-            }
-            if (j < b.length) {
+            } else if (j < b.length) { //if condition not required, as there can only be 1 array larger than other.
                 for (int k = j; k < b.length; k++) {
                     System.out.println(b[k]);
                 }
@@ -51,11 +53,13 @@ public class Array {
         }
     }
 
-    public void intersect(int[] a, int[] b) {
+    public void intersectOnSortedArrays(int[] a, int[] b) {
         if (a != null || b != null) {
 
             int i = 0;
             int j = 0;
+            System.out.println("Intersection: ");
+
             while (i < a.length && j < b.length) {
                 if (a[i] < b[j]) {
                     i++;
@@ -71,27 +75,24 @@ public class Array {
     }
 
     public void unsortedUnion(Integer[] a, Integer[] b) {
-        Integer[] output = null;
+        Integer[] output;
         if (a.length > b.length) {
-            output = a;
-            output = copySecond(output, b);
+            output = compareSmallerWithBigger(a, b);
         } else if (b.length > a.length) {
-            output = b;
-            output = copySecond(output, a);
+            output = compareSmallerWithBigger(b, a);
         } else {
-            output = a;
-            output = copySecond(output, b);
+            output = compareSmallerWithBigger(a, b);
         }
-        for (Integer res : output) {
-            System.out.println(res);
+        for (Integer integer : output) {
+            System.out.println(integer);
         }
     }
 
-    public Integer[] copySecond(Integer[] result, Integer[] second) {
-        List<Integer> resultList = new ArrayList<Integer>(Arrays.asList(result));
-        for (int i = 0; i < second.length; i++) {
-            if (!resultList.contains(second[i])) { // can sort and do binary search in smaller array instead
-                resultList.add(second[i]);
+    public Integer[] compareSmallerWithBigger(Integer[] bigger, Integer[] smaller) {
+        List<Integer> resultList = new ArrayList<Integer>(Arrays.asList(bigger));
+        for (int i = 0; i < smaller.length; i++) {
+            if (!resultList.contains(smaller[i])) { // can sort and do binary search in smaller array instead
+                resultList.add(smaller[i]);
             }
         }
         Integer[] output = new Integer[resultList.size()];
@@ -117,7 +118,7 @@ public class Array {
         Arrays.sort(smaller);
         int index = 0;
         for (int i = 0; i < bigger.length; i++) {
-            boolean present = binarySearchInSmaller(smaller, bigger[i]);
+            boolean present = binarySearch(smaller, bigger[i]);
             if (present) {
                 output[index] = bigger[i];
                 index++;
@@ -126,7 +127,7 @@ public class Array {
         return output;
     }
 
-    public boolean binarySearchInSmaller(Integer[] array, int value) {
+    public boolean binarySearch(Integer[] array, int value) {
         int low = 0;
         int high = array.length - 1;
 
