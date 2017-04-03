@@ -1,5 +1,7 @@
 package ds.bst;
 
+import java.util.ArrayList;
+
 public class TreeNode {
 
     TreeNode left;
@@ -20,5 +22,15 @@ public class TreeNode {
         this.right = right;
         this.data = data;
         this.visited = false;
+    }
+
+    public ArrayList<TreeNode> getChildNodes() {
+        ArrayList<TreeNode> children = null;
+        if (this != null) {
+            children = new ArrayList<>();
+            children.add(this.left);
+            children.add(this.right);
+        }
+        return children;
     }
 }

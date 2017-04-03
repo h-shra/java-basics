@@ -27,6 +27,13 @@ public class BinarySearchTree {
         resetState(root);
         System.out.println("DFS Traversal");
         bst.dfsTraversal(root);
+        System.out.println("Minimal Height BST");
+        root = bst.constructMinimalBst(new int[] {0, 2, 3, 60, 100, 2200});
+        System.out.println("Level lists");
+        ArrayList<ArrayList<TreeNode>> arrayLists = bst.generateLevelLists(root);
+        for (ArrayList<TreeNode> list : arrayLists) {
+            System.out.println(list.size());
+        }
     }
 
     private static void resetState(TreeNode root) {
@@ -43,7 +50,7 @@ public class BinarySearchTree {
      *
      ******************************************************/
 
-    private TreeNode insert(TreeNode n, int toInsert) {
+    public TreeNode insert(TreeNode n, int toInsert) {
         if (n == null) {
             return new TreeNode(toInsert);
         }
@@ -53,6 +60,28 @@ public class BinarySearchTree {
             n.right = insert(n.right, toInsert);
         }
         return n;
+    }
+
+    /*****************************************************
+     *
+     *            CONSTRUCT Minimal Height BST
+     *
+     ******************************************************/
+
+    public TreeNode constructMinimalBst(int[] array) {
+        root = constructMinimalBst(array, 0, array.length-1);
+        return root;
+    }
+
+    private TreeNode constructMinimalBst(int[] array, int low, int high) {
+        if (high < low) {
+            return null;
+        }
+        int mid = (low+high)/2;
+        TreeNode node = new TreeNode(array[mid]);
+        node.left = constructMinimalBst(array, low, mid-1);
+        node.right = constructMinimalBst(array, mid+1, high);
+        return node;
     }
 
     /*****************************************************
@@ -101,6 +130,11 @@ public class BinarySearchTree {
         }
     }
 
+    /*****************************************************
+     *
+     *            BFS TRAVERSAL
+     *
+     ******************************************************/
     public void bfsTraversal(TreeNode root) {
         if (root == null) {
             return;
@@ -110,11 +144,12 @@ public class BinarySearchTree {
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
+        TreeNode current;
         while (!queue.isEmpty()) {
-            TreeNode current = queue.removeFirst(); //has to be removeFirst
+            current = queue.removeFirst(); //has to be removeFirst
             if (current != null) {
                 System.out.println(current.data);
-                for (TreeNode node : getChildNodes(current)) {
+                for (TreeNode node : current.getChildNodes()) {
                     if (node != null && !node.visited) {
                         node.visited = true;
                         queue.add(node);
@@ -125,6 +160,11 @@ public class BinarySearchTree {
 
     }
 
+    /*****************************************************
+     *
+     *            DFS TRAVERSAL
+     *
+     ******************************************************/
     public void dfsTraversal(TreeNode root) {
         if (root == null) {
             return;
@@ -138,7 +178,7 @@ public class BinarySearchTree {
             TreeNode current = stack.pop();
             if (current != null) {
                 System.out.println(current.data);
-                for (TreeNode node : getChildNodes(current)) {
+                for (TreeNode node : current.getChildNodes()) {
                     if (node != null && !node.visited) {
                         node.visited = true;
                         stack.push(node);
@@ -146,13 +186,6 @@ public class BinarySearchTree {
                 }
             }
         }
-    }
-
-    private ArrayList<TreeNode> getChildNodes(TreeNode node) {
-        ArrayList<TreeNode> children = new ArrayList<>();
-        children.add(node.left);
-        children.add(node.right);
-        return children;
     }
 
     /*****************************************************
@@ -165,5 +198,34 @@ public class BinarySearchTree {
             return 0;
         }
         return size(root.left) + size(root.right) + 1;
+    }
+
+    /*****************************************************
+     *
+     *            List of Nodes at each level
+     *
+     ******************************************************/
+    public ArrayList<ArrayList<TreeNode>> generateLevelLists(TreeNode root) {
+        ArrayList<ArrayList<TreeNode>> allLevelLists = new ArrayList<>();
+        ArrayList<TreeNode> currentLevelList = new ArrayList<>();
+        if (root != null) {
+            currentLevelList.add(root);
+        }
+
+        while (currentLevelList.size() > 0) {
+            allLevelLists.add(currentLevelList); //Add prev level list to result
+            ArrayList<TreeNode> tempList = currentLevelList;
+            currentLevelList = new ArrayList<>(); //Create next level list
+            for (TreeNode node : tempList) {
+                if (node.left != null) {
+                    currentLevelList.add(node.left);
+                }
+                if (node.right != null) {
+                    currentLevelList.add(node.right);
+                }
+            }
+        }
+
+        return allLevelLists;
     }
 }

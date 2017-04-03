@@ -17,10 +17,10 @@ public class MyBST {
         postorderTraversal(myRoot);*/
         System.out.println("Size of the BST : " + size(myRoot));
 
-        System.out.println("Size of the BST : " + size(myRoot, 2));
+        //System.out.println("Size of the BST : " + size(myRoot, 2));
 
-        /*System.out.println("Max depth of the BST : " + maxDepth(myRoot));
-        System.out.println("Minimum node in BST : " + min(myRoot).data);
+        System.out.println("Max depth of the BST : " + maxDepth(myRoot));
+        /*System.out.println("Minimum node in BST : " + min(myRoot).data);
         System.out.println("Maximum node in BST : " + max(myRoot).data);
         System.out.println("Least common ancestor of 110 and 175 : " + leastCommonAncestor(myRoot, 110, 175).data);
         System.out.println("Preorder");
@@ -256,7 +256,7 @@ public class MyBST {
         return current;
     }
 
-    // check if given binary tree is BST
+    // check if given binary tree is BST - for a given node, LEFT = {MIN, CURRENT], RIGHT = [CURRENT, MAX}
     public static boolean isBstRecurse(TreeNode root) {
         return isBstRecurse(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
@@ -284,7 +284,7 @@ public class MyBST {
     //      \
     /       25
     */
-    public static boolean isBst(TreeNode root) {
+    /*public static boolean isBst(TreeNode root) {
         return (isLeftBst(root) && isRightBst(root));
 
     }
@@ -317,5 +317,5 @@ public class MyBST {
             }
         }
         return false;
-    }
+    }*/
 }
