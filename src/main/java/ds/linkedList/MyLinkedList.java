@@ -5,46 +5,55 @@ import java.util.Map;
 
 public class MyLinkedList {
 
-    protected static Node head = null;
-    protected static int nodeCount = 0;
-
     public static void main(String[] args) {
+        MyLinkedList list = new MyLinkedList();
+        Node head = null;
         int data = 5;
-        head = deleteNode(data);
-        head = removeDups();
-        addAtEnd(data);
+        head = list.deleteNode(head, data);
+        head = list.removeDups(head);
+        head = list.addAtEnd(head, data);
         data = 20;
-        addAtFirst(data);
-        print();
+        head = list.addAtFirst(head, data);
+        list.print(head);
         data = 10;
-        addAtEnd(data);
-        print();
-        head = deleteNode(data);
-        print();
-        reverse();
-        print();
-        addAtEnd(new Integer(1));
-        addAtEnd(new Integer(23));
-        addAtEnd(new Integer(0));
-        addAtEnd(new Integer(22));
-        print();
-        head = changeHead(0);
-        print();
-        addAtFirst(0);
-        addAtEnd(new Integer(22));
-        addAtEnd(new Integer(22));
-        print();
-        head = removeDups();
-        print();
-        addAtEnd(new Integer(9));
-        addAtEnd(new Integer(9));
-        print();
-        System.out.println(returnNthFromLast(3).data);
+        head = list.addAtEnd(head, data);
+        list.print(head);
+        head = list.deleteNode(head, data);
+        list.print(head);
+        head = list.reverse(head);
+        list.print(head);
+        head = list.addAtEnd(head, new Integer(1));
+        head = list.addAtEnd(head, new Integer(23));
+        head = list.addAtEnd(head, new Integer(0));
+        head = list.addAtEnd(head, new Integer(22));
+        list.print(head);
+        head = list.changeHead(head, 0);
+        list.print(head);
+        head = list.addAtFirst(head, 0);
+        head = list.addAtEnd(head, new Integer(22));
+        head = list.addAtEnd(head, new Integer(22));
+        list.print(head);
+        head = list.removeDups(head);
+        list.print(head);
+        head = list.addAtEnd(head, new Integer(9));
+        head = list.addAtEnd(head, new Integer(9));
+        list.print(head);
+        System.out.println(list.returnNthFromLast(head, 3).data);
+        Node first = head;
+        Node second = new Node(20000);
+        second = list.addAtEnd(second, 2000);
+        second = list.addNodeAt(second, list.getNodeAt(first, 3), list.size(second) - 1);
+        System.out.println("Two lists");
+        list.print(first);
+        System.out.println("--");
+        list.print(second);
+        System.out.println(list.findIfIntersect(first, second));
+        System.out.println(list.findIntersectingNode(first, second).data);
     }
 
 
     //print linked list
-    public static void print() {
+    public void print(Node head) {
         if (head == null) {
             System.out.println("LL empty");
         } else {
@@ -59,7 +68,7 @@ public class MyLinkedList {
     }
 
     //insert at the end
-    public static void addAtEnd(int data) {
+    public Node addAtEnd(Node head, int data) {
         if (head == null) {
             head = new Node(data);
         } else {
@@ -70,11 +79,11 @@ public class MyLinkedList {
             }
             currentNode.next = new Node(data);
         }
-        nodeCount++;
+        return head;
     }
 
     //insert at first position
-    public static void addAtFirst(int data) {
+    public Node addAtFirst(Node head, int data) {
         if (head == null) {
             head = new Node(data);
         } else {
@@ -82,10 +91,10 @@ public class MyLinkedList {
             newHead.next = head;
             head = newHead;
         }
-        nodeCount++;
+        return head;
     }
 
-    public static Node reverse() {
+    public Node reverse(Node head) {
         Node reversedPart = null;
         Node current = head;
         while (current != null) {
@@ -100,7 +109,7 @@ public class MyLinkedList {
     }
 
     //delete a node when only that Node is accessible
-    public static void delete(Node ntd) {
+    public void delete(Node ntd) {
         if (ntd == null) {
             System.out.println("No node to delete");
         } else {
@@ -110,7 +119,7 @@ public class MyLinkedList {
     }
 
     //Delete a node given access to the head
-    public static Node deleteNode(Integer obj) {
+    public Node deleteNode(Node head, Integer obj) {
         Node temp = head;
         if (temp == null) {
             System.out.println("No LL to delete from");
@@ -131,7 +140,7 @@ public class MyLinkedList {
     }
 
     // 12->3->0->2->6->null
-    public static Node changeHead(int value) {
+    public Node changeHead(Node head, int value) {
         if (head == null) {
             return new Node(value);
         }
@@ -161,7 +170,7 @@ public class MyLinkedList {
     }
 
     //Write code to remove duplicates from an unsorted linked list.
-    public static Node removeDups() {
+    public Node removeDups(Node head) {
         if (head != null) {
             Node current = head;
             Map<Integer, Integer> map = new HashMap<>(); //Set<Integer> more suitable
@@ -197,7 +206,7 @@ public class MyLinkedList {
     *                     F           S//after while ends, F=3rd last, S=null
     * */
 
-    public static Node returnNthFromLast(int n) {
+    public Node returnNthFromLast(Node head, int n) {
         if (head == null) {
             System.out.println("LL length less than " + n);
             return null;
@@ -216,7 +225,6 @@ public class MyLinkedList {
             }
         }
 
-        System.out.println("Second at " + second.data);
         while (second != null) {
             second = second.next;
             first = first.next;
@@ -225,5 +233,104 @@ public class MyLinkedList {
         return first;
     }
 
+    //check if given lists intersect
+    public boolean findIfIntersect(Node firstList, Node secondList) {
+        //Two lists intersect if they have same tail (Object)
+        Node firstTail = findTailNode(firstList);
+        Node secondTail = findTailNode(secondList);
+        if (firstTail == secondTail) {
+            return true;
+        }
+        return false;
+    }
 
+    //1->2->3->4->null
+    private Node findTailNode(Node node) {
+        Node tail = null;
+        while (node.next != null) {
+            node = node.next;
+            tail = node;
+        }
+        return tail;
+    }
+
+    public Node findIntersectingNode(Node firstList, Node secondList) {
+        Node meetingPoint = null;
+        int firstLength = size(firstList);
+        int secondLength = size(secondList);
+        int lengthDiff = 0;
+        Node biggerList = null;
+        Node smallerList = null;
+        if (firstLength > secondLength) {
+            lengthDiff = firstLength - secondLength;
+            biggerList = firstList;
+            smallerList = secondList;
+        } else {
+            lengthDiff = secondLength - firstLength;
+            biggerList = secondList;
+            smallerList = firstList;
+        }
+        for (int i = 0; i < lengthDiff; i++) {
+            biggerList = biggerList.next;
+        }
+
+        while (biggerList != smallerList) {
+            biggerList = biggerList.next;
+            smallerList = smallerList.next;
+        }
+
+        meetingPoint = biggerList;
+
+        return meetingPoint;
+    }
+
+    public int size(Node head) {
+        int size = 0;
+        while (head != null) {
+            head = head.next;
+            size++;
+        }
+        return size;
+    }
+
+    //Insert node at given position
+    public Node addNodeAt(Node head, Node nta, int pos) {
+        Node temp = head;
+        for (int i = 0; i < pos; i++) {
+            if (temp.next == null) {
+                System.out.println("List shorter than the position");
+                return head;
+            }
+            temp = temp.next;
+        }
+        temp.next = nta;
+        return head;
+    }
+
+    //Retrieve node at given position
+    public Node getNodeAt(Node head, int pos) {
+        Node temp = head;
+        for (int i = 0; i < pos; i++) {
+            if (temp.next == null) {
+                System.out.println("List shorter than the position");
+                return head;
+            }
+            temp = temp.next;
+        }
+        return temp;
+    }
+
+    //Reverse a linked list
+    public Node reverseMe(Node head) {
+        Node current = head;
+        Node prev = null;
+        while (current!=null) {
+            Node next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+        return head;
+    }
 }
