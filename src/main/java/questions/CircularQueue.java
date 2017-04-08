@@ -26,7 +26,7 @@ public class CircularQueue {
         circularQueue.enqueue(1); // 3 2 1
         circularQueue.enqueue(0); // Error
         int output = circularQueue.dequeue();
-        circularQueue.enqueue(0); // 2 1 0
+        circularQueue.enqueue(0); // 0(end) 2(start) 1
     }
 
     private Integer dequeue() {

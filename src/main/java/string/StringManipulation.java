@@ -1,5 +1,7 @@
 package string;
 
+import java.util.Stack;
+
 public class StringManipulation {
 
     public static void main(String[] args) {
@@ -29,7 +31,7 @@ public class StringManipulation {
         String input = "My name is xyz.";
         char[] inputArr = input.toCharArray();
         reverseChars(inputArr, 0, input.length() - 1);
-        System.out.println(inputArr); */
+        System.out.println(inputArr);
         String input = "My name is xyz.";
         input = reverseWords(input);
         System.out.println(input);
@@ -47,6 +49,12 @@ public class StringManipulation {
         System.out.println(ans);
 
         permutation("test");*/
+
+        System.out.println(swapVowels("unitedstates"));
+        System.out.println(swapVowelsUsingSpace("unitedstates"));
+        System.out.println(swapVowels("alliteration"));
+        System.out.println(compressConsonants("apple"));
+
     }
 
     public static boolean hasUniqueChars(String input) {
@@ -272,32 +280,79 @@ public class StringManipulation {
         return outputStrings;
     }
 
-    // u n i t e d s t a t e s
-    public String swapVowels(String input) {
+    // u n i t e d s t a t e s => e n a t e d s t i t u s
+    // a l l i t e r a t i o n => o l l i t a r e t i a n
+    public static String swapVowels(String input) {
         char[] inputArr = input.toCharArray();
         int start = 0;
-        int end =
-                input.length() - 1;
+        int end = input.length() - 1;
         while (start < end) {
             if (isVowel(inputArr[start]) && isVowel(inputArr[end])) {
-                swapChars(inputArr[start], inputArr[end]);
+                swapChars(inputArr, start, end);
                 start++;
                 end--;
             } else if (!isVowel(inputArr[start])) {
                 start++;
             } else if (!isVowel(inputArr[end])) {
                 end--;
+            } else {
             }
         }
-        return String.copyValueOf(inputArr);
+        return new String(inputArr);
+    }
+
+    public static String swapVowelsUsingSpace(String input) {
+        char[] inputArray = input.toCharArray();
+        Stack<Character> vowelStack = new Stack<>();
+
+        for(int i=0; i< inputArray.length; i++) {
+            char c = inputArray[i];
+            if (isVowel(c)) {
+                vowelStack.push(c);
+                inputArray[i] = '#';
+            }
+        }
+
+        for(int i=0; i< inputArray.length; i++) {
+            char c = inputArray[i];
+            if (c == '#') {
+                inputArray[i] = vowelStack.pop();
+            }
+        }
+
+        return new String(inputArray);
+    }
+
+    private static void swapChars(char[] input, int start, int end) {
+        char temp = input[start];
+        input[start] = input[end];
+        input[end] = temp;
 
     }
 
-    private boolean isVowel(char c) {
+    private static boolean isVowel(char c) {
+        if((c == 'a') || (c == 'e')  || (c == 'i') || (c == 'o') || (c == 'u')) {
+            return true;
+        }
         return false;
     }
 
-    private void swapChars(char c, char c1) {
+    // apple => a3e
+    public static String compressConsonants(String input) {
+        StringBuilder sb = new StringBuilder("");
+        int consonantCount = 0;
 
+        for (int i=0; i<input.length(); i++) {
+            char currentChar = input.charAt(i);
+            if (isVowel(currentChar)) {
+                sb.append(consonantCount);
+                sb.append(currentChar);
+            } else {
+                consonantCount ++;
+            }
+        }
+
+        return sb.toString();
     }
+
 }
