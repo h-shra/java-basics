@@ -9,23 +9,23 @@ public class MyBST {
         System.out.println("My Binary Search Tree");
         // myRoot = buildBst();
         myRoot = buildBstUsingRec();
-        /*System.out.println("Preorder");
+        System.out.println("Preorder");
         preorderTraversal(myRoot);
         System.out.println("Inorder");
         inorderTraversal(myRoot);
         System.out.println("Postorder");
-        postorderTraversal(myRoot);*/
+        postorderTraversal(myRoot);
         System.out.println("Size of the BST : " + size(myRoot));
 
         //System.out.println("Size of the BST : " + size(myRoot, 2));
 
         System.out.println("Max depth of the BST : " + maxDepth(myRoot));
-        /*System.out.println("Minimum node in BST : " + min(myRoot).data);
+        System.out.println("Minimum node in BST : " + min(myRoot).data);
         System.out.println("Maximum node in BST : " + max(myRoot).data);
         System.out.println("Least common ancestor of 110 and 175 : " + leastCommonAncestor(myRoot, 110, 175).data);
         System.out.println("Preorder");
         preorderTraversal(myRoot);
-        System.out.println("Is BSTrecursive? : " + isBstRecurse(myRoot));*/
+        System.out.println("Is BSTrecursive? : " + isBstRecurse(myRoot));
     }
 
     private static TreeNode buildBstUsingRec() {
@@ -229,7 +229,7 @@ public class MyBST {
         return current;
     }
 
-    // minimum node
+    // maximum node
     public static TreeNode max(TreeNode root) {
         TreeNode current = null;
         while (root != null) {

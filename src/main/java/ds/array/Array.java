@@ -20,6 +20,10 @@ public class Array {
         array.findPairs(new int[]{1, 4, 45, 6, 10, -8, 1, 0}, 10);
         array.findPairsWithSet(new int[]{3, 7, 4, 0, 10, 99, 7, 14}, 7);
 
+        List<Integer> kMostFrequent = array.findKMostFrequent(new int[]{1, 2, 2, 2, 2, 2, 3, 3, 3, 6, 6, 6, 6}, 2);
+        for (Integer i : kMostFrequent) {
+            System.out.println(i);
+        }
     }
 
     public void unionOnSortedArrays(int[] a, int[] b) {
@@ -185,7 +189,6 @@ public class Array {
 
     //find k most frequent elements
     public List<Integer> findKMostFrequent(int[] array, int k) {
-        List<Integer> frequentElements = null;
 
         //Count frequency of each element
         HashMap<Integer, Integer> frequencyMap = new HashMap<>(array.length);
@@ -197,10 +200,39 @@ public class Array {
             }
         }
 
-        //TODO : construct max heap
+        // create a min heap
+        PriorityQueue<Pair> queue = new PriorityQueue<Pair>(new Comparator<Pair>(){
+            public int compare(Pair a, Pair b){
+                return a.count - b.count;
+            }
+        });
+
+        //maintain a heap of size k.
+        for(Map.Entry<Integer, Integer> entry: frequencyMap.entrySet()){
+            Pair p = new Pair(entry.getKey(), entry.getValue());
+            queue.offer(p);
+            if(queue.size()>k){
+                queue.poll();
+            }
+        }
+        
+        List<Integer> frequentElements = new ArrayList<>(k);
+        //get all elements from the heap
+        while(queue.size()>0){
+            frequentElements.add(queue.poll().num);
+        }
+        //reverse the order
+        Collections.reverse(frequentElements);
 
         return frequentElements;
     }
 
-
+    class Pair{
+        int num;
+        int count;
+        public Pair(int num, int count){
+            this.num=num;
+            this.count=count;
+        }
+    }
 }

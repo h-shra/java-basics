@@ -8,7 +8,7 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         List<Integer> treeList =
-                Arrays.asList(1, 5, 2, 7, 0);
+                Arrays.asList(1,5,2,7,4);
         //Arrays.asList(8, 5, 4, 9, 7, 11, 1, 12, 3, 2);
 
         BinarySearchTree bst = new BinarySearchTree();
@@ -28,12 +28,17 @@ public class BinarySearchTree {
         System.out.println("DFS Traversal");
         bst.dfsTraversal(root);
         System.out.println("Minimal Height BST");
-        root = bst.constructMinimalBst(new int[] {0, 2, 3, 60, 100, 2200});
+        root = bst.constructMinimalBstFromSortedArray(new int[]{0, 2, 3, 60, 100, 2200});
         System.out.println("Level lists");
         ArrayList<ArrayList<TreeNode>> arrayLists = bst.generateLevelLists(root);
         for (ArrayList<TreeNode> list : arrayLists) {
-            System.out.println(list.size());
+            System.out.print("Level : ");
+            for (TreeNode node : list) {
+                System.out.print(node.data + " ");
+            }
+            System.out.println();
         }
+        System.out.println("Node count : " + bst.size(root, 2));
     }
 
     private static void resetState(TreeNode root) {
@@ -68,8 +73,8 @@ public class BinarySearchTree {
      *
      ******************************************************/
 
-    public TreeNode constructMinimalBst(int[] array) {
-        root = constructMinimalBst(array, 0, array.length-1);
+    public TreeNode constructMinimalBstFromSortedArray(int[] array) {
+        root = constructMinimalBst(array, 0, array.length - 1);
         return root;
     }
 
@@ -77,10 +82,10 @@ public class BinarySearchTree {
         if (high < low) {
             return null;
         }
-        int mid = (low+high)/2;
+        int mid = (low + high) / 2;
         TreeNode node = new TreeNode(array[mid]);
-        node.left = constructMinimalBst(array, low, mid-1);
-        node.right = constructMinimalBst(array, mid+1, high);
+        node.left = constructMinimalBst(array, low, mid - 1);
+        node.right = constructMinimalBst(array, mid + 1, high);
         return node;
     }
 
@@ -157,7 +162,6 @@ public class BinarySearchTree {
                 }
             }
         }
-
     }
 
     /*****************************************************
@@ -202,6 +206,49 @@ public class BinarySearchTree {
 
     /*****************************************************
      *
+     *      Number of Nodes from given level onwards
+     *
+     ******************************************************/
+    public int size(TreeNode root, int level) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (level == 1) {
+            return 1;
+        }
+
+        ArrayList<TreeNode> currentLevelNodes = new ArrayList<>();
+        currentLevelNodes.add(root);
+        return size(currentLevelNodes, level, 1, 0);
+    }
+
+    private int size(ArrayList<TreeNode> currentLevelNodes, int level, int currentLevel, int nodeCount) {
+
+        while (currentLevelNodes.size() > 0) {
+            currentLevel = currentLevel + 1;
+            if (currentLevel < level) {
+                nodeCount = 0;
+            }
+            ArrayList<TreeNode> tempList = currentLevelNodes;
+            currentLevelNodes = new ArrayList<>();
+            for (TreeNode node : tempList) {
+                if (node.left != null) {
+                    currentLevelNodes.add(node.left);
+                    nodeCount++;
+                }
+                if (node.right != null) {
+                    currentLevelNodes.add(node.right);
+                    nodeCount++;
+                }
+            }
+        }
+        return nodeCount;
+    }
+
+
+    /*****************************************************
+     *
      *            List of Nodes at each level
      *
      ******************************************************/
@@ -228,4 +275,6 @@ public class BinarySearchTree {
 
         return allLevelLists;
     }
+
+
 }
