@@ -149,6 +149,7 @@ public class Array {
         return false;
     }
 
+    //Find 2 integers that have given sum
     public void findPairs(int[] array, int sum) {
         Arrays.sort(array);
         int left = 0;
@@ -180,6 +181,25 @@ public class Array {
                 set.add(array[i]);
             }
         }
+    }
+
+    //find k most frequent elements
+    public List<Integer> findKMostFrequent(int[] array, int k) {
+        List<Integer> frequentElements = null;
+
+        //Count frequency of each element
+        HashMap<Integer, Integer> frequencyMap = new HashMap<>(array.length);
+        for(int i =0; i<array.length; i++) {
+            if (frequencyMap.containsKey(array[i])) {
+                frequencyMap.put(array[i], frequencyMap.get(array[i]) + 1);
+            } else {
+                frequencyMap.put(array[i], 1);
+            }
+        }
+
+        //TODO : construct max heap
+
+        return frequentElements;
     }
 
 
