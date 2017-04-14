@@ -192,7 +192,7 @@ public class Array {
 
         //Count frequency of each element
         HashMap<Integer, Integer> frequencyMap = new HashMap<>(array.length);
-        for(int i =0; i<array.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             if (frequencyMap.containsKey(array[i])) {
                 frequencyMap.put(array[i], frequencyMap.get(array[i]) + 1);
             } else {
@@ -201,24 +201,25 @@ public class Array {
         }
 
         // create a min heap
-        PriorityQueue<Pair> queue = new PriorityQueue<Pair>(new Comparator<Pair>(){
-            public int compare(Pair a, Pair b){
-                return a.count - b.count;
+        PriorityQueue<Pair> queue = new PriorityQueue<Pair>(new Comparator<Pair>() {
+            public int compare(Pair a, Pair b) {
+                int i = a.count - b.count;
+                return i;
             }
         });
 
         //maintain a heap of size k.
-        for(Map.Entry<Integer, Integer> entry: frequencyMap.entrySet()){
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
             Pair p = new Pair(entry.getKey(), entry.getValue());
             queue.offer(p);
-            if(queue.size()>k){
+            if (queue.size() > k) {
                 queue.poll();
             }
         }
-        
+
         List<Integer> frequentElements = new ArrayList<>(k);
         //get all elements from the heap
-        while(queue.size()>0){
+        while (queue.size() > 0) {
             frequentElements.add(queue.poll().num);
         }
         //reverse the order
@@ -227,12 +228,13 @@ public class Array {
         return frequentElements;
     }
 
-    class Pair{
+    class Pair {
         int num;
         int count;
-        public Pair(int num, int count){
-            this.num=num;
-            this.count=count;
+
+        public Pair(int num, int count) {
+            this.num = num;
+            this.count = count;
         }
     }
 }

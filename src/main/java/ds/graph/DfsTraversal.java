@@ -3,7 +3,7 @@ package ds.graph;
 import java.util.Stack;
 
 /*
-* Graph:
+* GraphHelper:
 *
 *       6
 *       |
@@ -23,16 +23,18 @@ import java.util.Stack;
 *  BFS : 7 1 2 4 5 3 8 6
 *
 * */
-public class DfsTraversal extends Traversal {
+public class DfsTraversal {
 
     public static void main(String[] args) {
-        DfsTraversal traversal = new DfsTraversal();
-        GraphNode node = traversal.buildGraph();
-        System.out.println(traversal.dfsIterativeSearch(node, 6));
+
+        GraphHelper graphHelper = new GraphHelper();
+        GraphNode node = graphHelper.buildGraph();
+        DfsTraversal dfsTraversal = new DfsTraversal();
+        System.out.println(dfsTraversal.dfsIterativeSearch(node, 6));
         System.out.println("------");
-        // TODO: Optimize this to reset boolean without having to rebuild teh graph
-        node = traversal.buildGraph(); // to reset visited to false
-        traversal.dfsRecursive(node);
+        // TODO: Optimize this to reset boolean without having to rebuild the graph
+        node = graphHelper.buildGraph(); // to reset visited to false
+        dfsTraversal.dfsRecursive(node);
     }
 
     private boolean dfsIterativeSearch(GraphNode startNode, int value) {

@@ -22,10 +22,10 @@ public class BinarySearchTree {
         bst.inOrder(root);
         System.out.println("postOrder");
         bst.postOrder(root);
-        System.out.println("BFS Traversal");
+        System.out.println("BFS GraphHelper");
         bst.bfsTraversal(root);
         resetState(root);
-        System.out.println("DFS Traversal");
+        System.out.println("DFS GraphHelper");
         bst.dfsTraversal(root);
         System.out.println("Minimal Height BST");
         root = bst.constructMinimalBstFromSortedArray(new int[]{0, 2, 3, 60, 100, 2200});

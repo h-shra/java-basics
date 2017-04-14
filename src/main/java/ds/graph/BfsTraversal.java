@@ -1,7 +1,7 @@
 package ds.graph;
 
 /*
-* Graph:
+* GraphHelper:
 *
 *       6
 *       |
@@ -21,16 +21,17 @@ package ds.graph;
 *  BFS : 7 1 2 4 5 3 8 6
 *
 * */
-public class BfsTraversal extends Traversal {
+public class BfsTraversal {
 
     public static void main(String[] args) {
-        BfsTraversal graph = new BfsTraversal();
-        GraphNode node = graph.buildGraph();
-        System.out.println(graph.bfsIterativeSearch(node, 0));
+        GraphHelper graphHelper = new GraphHelper();
+        GraphNode node = graphHelper.buildGraph();
+        BfsTraversal bfsTraversal = new BfsTraversal();
+        System.out.println(bfsTraversal.bfsIterativeSearch(node, 0));
         System.out.println("------");
-        // TODO: Optimize this to reset boolean without having to rebuild teh graph
-        node = graph.buildGraph(); // to reset visited to false
-        graph.bfsRecursive(node);
+        // TODO: Optimize this to reset boolean without having to rebuild the graph
+        node = graphHelper.buildGraph(); // to reset visited to false
+        bfsTraversal.bfsRecursive(node);
     }
 
     private void bfsRecursive(GraphNode node) {

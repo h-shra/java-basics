@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Traversal {
+public class GraphHelper {
     /*
-    * Graph:
+    * GraphHelper:
     *
     *       6
     *       |
