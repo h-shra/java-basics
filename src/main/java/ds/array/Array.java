@@ -10,7 +10,7 @@ public class Array {
         array.intersectOnSortedArrays(new int[]{1, 3, 4, 5, 7}, new int[]{2, 3, 5, 6});
         array.unionOnSortedArrays(new int[]{1, 3, 4, 5, 7}, new int[]{2, 3, 5, 6});
         array.unionOnSortedArrays(new int[]{1, 3}, new int[]{2, 3, 5, 6});
-        array.unionOnSortedArrays(new int[]{1, 2, 2, 2, 2, 2, 2, 3, 6, 6, 6, 6, 6, 6}, new int[]{2, 2, 3, 6, 6,});
+        array.unionOnSortedArrays(new int[]{1, 2, 2, 2, 2, 2, 2, 3, 6, 6, 6, 6, 6, 6}, new int[]{2, 2, 3, 6, 6});
         //unsorted
         array.unsortedUnion(new Integer[]{1, 3, 4, 5, 7}, new Integer[]{2, 3, 5, 6});
         array.unsortedIntersect(new Integer[]{1, 3, 4, 5, 7}, new Integer[]{2, 3, 5, 6});
@@ -20,11 +20,28 @@ public class Array {
         array.findPairs(new int[]{1, 4, 45, 6, 10, -8, 1, 0}, 10);
         array.findPairsWithSet(new int[]{3, 7, 4, 0, 10, 99, 7, 14}, 7);
 
+        int result = array.findElementWithOddOccurrence(new int[]{2, 6, 2, 6, 6});
+        System.out.println(result);
+        result = array.findElementWithOddOccurrence(new int[]{2, 2, 2, 5, 5, 4, 4, 4, 4});
+        System.out.println(result);
+        result = array.findSmallestElement(new int[]{2, 3, 5, 4, 5, 2, 4, 3, 5, 2, 4, 4, 2});
+        System.out.println(result);
+        Integer[] output = array.findUniqueElements(new Integer[]{2, 3, 5, 4, 5, 2, 4, 3, 5, 2, 4, 4, 2});
+        System.out.println("Done");
+        for (Integer number : output) {
+            System.out.println(number);
+        }
+        output = array.findAllElementsWithOddOccurrence(new Integer[]{1, 3, 2, 5, 4, 5, 2, 4, 3, 9, 5, 2, 4, 4, 2});
+        System.out.println("Done");
+        for (Integer number : output) {
+            System.out.println(number);
+        }
         List<Integer> kMostFrequent = array.findKMostFrequent(new int[]{1, 2, 2, 2, 2, 2, 3, 3, 3, 6, 6, 6, 6}, 2);
         for (Integer i : kMostFrequent) {
             System.out.println(i);
         }
     }
+
 
     public void unionOnSortedArrays(int[] a, int[] b) {
         if (a != null || b != null) {
@@ -185,6 +202,55 @@ public class Array {
                 set.add(array[i]);
             }
         }
+    }
+
+    //Find the number that occurs odd number of time in input array.
+    //Works only for 1 number with odd occurrence
+    public int findElementWithOddOccurrence(int[] input) {
+        int xor = 0;
+        for (int i = 0; i < input.length; i++) {
+            xor = xor ^ input[i];
+        }
+        return xor == 0 ? -1 : xor;
+    }
+
+    public Integer[] findAllElementsWithOddOccurrence(Integer[] input) {
+        Integer[] output = null;
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0; i < input.length; i++) {
+            if (set.contains(input[i])) {
+                set.remove(input[i]);//remove the entry as this is even# occurrence
+            } else {
+                set.add(input[i]);
+            }
+        }
+        output = set.toArray(new Integer[set.size()]);
+        return output;
+    }
+
+
+    //Remove multiple occurrences of the numbers from the array.
+    private Integer[] findUniqueElements(Integer[] input) {
+        ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(input));// CANNOT be primitive array
+        Set<Integer> set = new HashSet<>();
+        set.addAll(arrayList);
+        arrayList.clear();
+        arrayList.addAll(set);
+        Integer[] output = arrayList.toArray(new Integer[arrayList.size()]);// Always mention new <T> [list.size()]
+
+        return output;
+    }
+
+    //Find smallest unique number
+    public int findSmallestElement(int[] input) {
+        int smallest = Integer.MAX_VALUE;
+        for (int value :
+                input) {
+            if (value < smallest) {
+                smallest = value;
+            }
+        }
+        return smallest;
     }
 
     //find k most frequent elements

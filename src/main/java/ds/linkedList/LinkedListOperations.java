@@ -3,52 +3,54 @@ package ds.linkedList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyLinkedList {
+public class LinkedListOperations {
 
     public static void main(String[] args) {
-        MyLinkedList list = new MyLinkedList();
+        LinkedListOperations listOperations = new LinkedListOperations();
         Node head = null;
         int data = 5;
-        head = list.deleteNode(head, data);
-        head = list.removeDups(head);
-        head = list.addAtEnd(head, data);
+        head = listOperations.deleteNode(head, data);
+        head = listOperations.removeDups(head);
+        head = listOperations.addAtEnd(head, data);
         data = 20;
-        head = list.addAtFirst(head, data);
-        list.print(head);
+        head = listOperations.addAtFirst(head, data);
+        listOperations.print(head);
         data = 10;
-        head = list.addAtEnd(head, data);
-        list.print(head);
-        head = list.deleteNode(head, data);
-        list.print(head);
-        head = list.reverse(head);
-        list.print(head);
-        head = list.addAtEnd(head, new Integer(1));
-        head = list.addAtEnd(head, new Integer(23));
-        head = list.addAtEnd(head, new Integer(0));
-        head = list.addAtEnd(head, new Integer(22));
-        list.print(head);
-        head = list.changeHead(head, 0);
-        list.print(head);
-        head = list.addAtFirst(head, 0);
-        head = list.addAtEnd(head, new Integer(22));
-        head = list.addAtEnd(head, new Integer(22));
-        list.print(head);
-        head = list.removeDups(head);
-        list.print(head);
-        head = list.addAtEnd(head, new Integer(9));
-        head = list.addAtEnd(head, new Integer(9));
-        list.print(head);
-        System.out.println(list.returnNthFromLast(head, 3).data);
+        head = listOperations.addAtEnd(head, data);
+        listOperations.print(head);
+        head = listOperations.deleteNode(head, data);
+        listOperations.print(head);
+        head = listOperations.reverse(head);
+        listOperations.print(head);
+        head = listOperations.addAtEnd(head, new Integer(1));
+        head = listOperations.addAtEnd(head, new Integer(23));
+        head = listOperations.addAtEnd(head, new Integer(0));
+        head = listOperations.addAtEnd(head, new Integer(22));
+        listOperations.print(head);
+        head = listOperations.changeHead(head, 0);
+        listOperations.print(head);
+        head = listOperations.addAtFirst(head, 0);
+        head = listOperations.addAtEnd(head, new Integer(22));
+        head = listOperations.addAtEnd(head, new Integer(22));
+        listOperations.print(head);
+        head = listOperations.removeNonDups(head);
+        listOperations.print(head);
+        /*head = operation.removeDups(head);
+        operation.print(head);
+        head = operation.addAtEnd(head, new Integer(9));
+        head = operation.addAtEnd(head, new Integer(9));
+        operation.print(head);
+        System.out.println(operation.returnNthFromLast(head, 3).data);
         Node first = head;
         Node second = new Node(20000);
-        second = list.addAtEnd(second, 2000);
-        second = list.addNodeAt(second, list.getNodeAt(first, 3), list.size(second) - 1);
+        second = operation.addAtEnd(second, 2000);
+        second = operation.addNodeAt(second, operation.getNodeAt(first, 3), operation.size(second) - 1);
         System.out.println("Two lists");
-        list.print(first);
+        operation.print(first);
         System.out.println("--");
-        list.print(second);
-        System.out.println(list.findIfIntersect(first, second));
-        System.out.println(list.findIntersectingNode(first, second).data);
+        operation.print(second);
+        System.out.println(operation.findIfIntersect(first, second));
+        System.out.println(operation.findIntersectingNode(first, second).data);*/
     }
 
 
@@ -166,6 +168,36 @@ public class MyLinkedList {
             temp = temp.next;
         }
         temp.next = head;
+        return newHead;
+    }
+
+    //Write code to delete the numbers that only appear once
+    //2->2->3->4->3->1->null returns 2->3-null
+    public Node removeNonDups(Node head) {
+        if (head == null) {
+            return null;
+        }
+        HashMap<Integer, Integer> countMap = new HashMap<>();
+        while (head != null) {
+            if (countMap.containsKey(head.data)) {
+                Integer currentCount = countMap.get(head.data);
+                countMap.put(head.data, ++currentCount);
+            } else {
+                countMap.put(head.data, 1);
+            }
+            head = head.next;
+        }
+        Node newHead = null;
+        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
+            if (entry.getValue() > 1) {
+                Node node = new Node(entry.getKey());
+                if (newHead == null) {
+                    newHead = node;
+                } else {
+                    newHead.next = node;
+                }
+            }
+        }
         return newHead;
     }
 
@@ -324,7 +356,7 @@ public class MyLinkedList {
     public Node reverseMe(Node head) {
         Node current = head;
         Node prev = null;
-        while (current!=null) {
+        while (current != null) {
             Node next = current.next;
             current.next = prev;
             prev = current;

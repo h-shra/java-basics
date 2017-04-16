@@ -4,16 +4,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public abstract class MyList implements List<Integer> {
+public abstract class MyListWithIterator implements List<Integer> {
 
     private int start;
     private int listSize;
 
     public class MyIterator implements Iterator<Integer> {
-        private final MyList myList;
+        private final MyListWithIterator myList;
         private int currentIndex;
 
-        public MyIterator(MyList list) {
+        public MyIterator(MyListWithIterator list) {
             this.currentIndex = list.start;
             this.myList = list;
         }
