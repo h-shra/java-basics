@@ -22,7 +22,9 @@ public class MyBST {
         System.out.println("Max depth of the BST : " + maxDepth(myRoot));
         System.out.println("Minimum node in BST : " + min(myRoot).data);
         System.out.println("Maximum node in BST : " + max(myRoot).data);
-        System.out.println("Least common ancestor of 110 and 175 : " + leastCommonAncestor(myRoot, 110, 175).data);
+        //System.out.println("Least common ancestor of 110 and 175 : " + leastCommonAncestor(myRoot, 110, 175).data);
+        System.out.println("Least common ancestor of 110 and 175 : " + inorderLca(myRoot, new TreeNode(110), new TreeNode(175)).data);
+
         System.out.println("Preorder");
         preorderTraversal(myRoot);
         System.out.println("Is BSTrecursive? : " + isBstRecurse(myRoot));
@@ -155,6 +157,28 @@ public class MyBST {
         printTreeNode(root);
         inorderTraversal(root.right);
     }
+
+    //w/o parent pointer
+    public static TreeNode inorderLca(TreeNode root, TreeNode x, TreeNode y) {
+        if (root == null) {
+            return  null;
+        }
+        if (root == x || root == y) {
+            return root;
+        }
+        TreeNode left = inorderLca(root.left, x, y);
+        TreeNode right = inorderLca(root.right, x, y);
+        if (left!=null && right!= null) {
+            return root;
+        } else {
+            if (left != null) {
+                return left;
+            } else {
+                return right;
+            }
+        }
+    }
+
 
     // post-order traversal O(n)
     public static void postorderTraversal(TreeNode root) {

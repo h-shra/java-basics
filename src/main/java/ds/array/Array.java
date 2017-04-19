@@ -20,6 +20,8 @@ public class Array {
         array.findPairs(new int[]{1, 4, 45, 6, 10, -8, 1, 0}, 10);
         array.findPairsWithSet(new int[]{3, 7, 4, 0, 10, 99, 7, 14}, 7);
 
+        array.sumExceptCurrent(new int[]{3, 7, 4, 0, 10, 9});
+
         int result = array.findElementWithOddOccurrence(new int[]{2, 6, 2, 6, 6});
         System.out.println(result);
         result = array.findElementWithOddOccurrence(new int[]{2, 2, 2, 5, 5, 4, 4, 4, 4});
@@ -251,6 +253,38 @@ public class Array {
             }
         }
         return smallest;
+    }
+
+    //Sum of all elements except ith element
+    public void sumExceptCurrent(int[] input) {
+        int[] result = new int[input.length];
+        int i = 0;
+        int sum = 0;
+        for (int j = 0; j < input.length; ++j) {
+            System.out.print(input[j] + " ");
+        }
+        System.out.println();
+        while (i < input.length) {
+            int temp = input[i];
+            result[i] = sum;
+            sum = sum + temp;
+            i++;
+        }
+        for (int j = 0; j < result.length; ++j) {
+            System.out.print(result[j] + " ");
+        }
+        System.out.println();
+        i--;
+        sum = 0;
+        while (i >= 0) {
+            int temp = input[i];
+            result[i] = result[i] + sum;
+            sum = sum + temp;
+            i--;
+        }
+        for (int j = 0; j < result.length; ++j) {
+            System.out.print(result[j] + " ");
+        }
     }
 
     //find k most frequent elements
