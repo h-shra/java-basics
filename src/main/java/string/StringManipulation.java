@@ -6,7 +6,7 @@ public class StringManipulation {
 
     public static void main(String[] args) {
 
-        /*System.out.println(insertStar("test"));
+        System.out.println(insertStar("test"));
         System.out.println(insertStar("A"));
 
         String[] strings = say_what_you_see(new String[] { "12", "21" });
@@ -32,7 +32,7 @@ public class StringManipulation {
         char[] inputArr = input.toCharArray();
         reverseChars(inputArr, 0, input.length() - 1);
         System.out.println(inputArr);
-        String input = "My name is xyz.";
+        input = "My name is xyz.";
         input = reverseWords(input);
         System.out.println(input);
 
@@ -295,7 +295,6 @@ public class StringManipulation {
                 start++;
             } else if (!isVowel(inputArr[end])) {
                 end--;
-            } else {
             }
         }
         return new String(inputArr);
