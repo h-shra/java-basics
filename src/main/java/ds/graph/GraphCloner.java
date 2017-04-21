@@ -39,12 +39,12 @@ public class GraphCloner {
                 GraphNode prevNodeClone = map.get(prevNode);
                 for (GraphNode node : prevNode.connectedNodes) {
                     if (node != null && !node.visited) {
-                        node.visited = true;
-                        queue.add(node);
                         final GraphNode clonedNode = new GraphNode(node.data);
                         // update the connectedNodes for prev's cloned node
                         prevNodeClone.connectedNodes.add(clonedNode);
-                        // add current connected node with its clone in map
+                        // add current connected node with its clone in map and que for further processing
+                        node.visited = true;
+                        queue.add(node);
                         map.put(node, clonedNode);
                     }
                 }

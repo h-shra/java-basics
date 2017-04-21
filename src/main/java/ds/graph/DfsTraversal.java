@@ -79,7 +79,7 @@ public class DfsTraversal {
         System.out.println(startNode.data);
         startNode.visited = true;
         for (GraphNode node : startNode.connectedNodes) {
-            if (!node.visited) {
+            if (node != null && !node.visited) {
                 dfsRecursive(node);
             }
         }

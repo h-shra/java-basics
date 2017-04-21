@@ -2,13 +2,13 @@ package ds.bst;
 
 import java.util.*;
 
-public class BinarySearchTree {
+public class BinarySearchTree implements Iterable<TreeNode>{
 
     private static TreeNode root;
 
     public static void main(String[] args) {
         List<Integer> treeList =
-                Arrays.asList(1,5,2,7,4);
+                Arrays.asList(5, 3, 7, 1, 4, 9);
         //Arrays.asList(8, 5, 4, 9, 7, 11, 1, 12, 3, 2);
 
         BinarySearchTree bst = new BinarySearchTree();
@@ -22,10 +22,14 @@ public class BinarySearchTree {
         bst.inOrder(root);
         System.out.println("postOrder");
         bst.postOrder(root);
-        System.out.println("BFS GraphHelper");
-        bst.bfsTraversal(root);
+        System.out.println("inOrder using iterator");
+        bst.useIterator(root);
+        System.out.println("BFS search");
+        System.out.println(bst.bfsTraversal(root, 77));
         resetState(root);
-        System.out.println("DFS GraphHelper");
+        System.out.println(bst.bfsTraversal(root, 7));
+        resetState(root);
+        System.out.println("DFS traversal");
         bst.dfsTraversal(root);
         System.out.println("Minimal Height BST");
         root = bst.constructMinimalBstFromSortedArray(new int[]{0, 2, 3, 60, 100, 2200});
@@ -39,6 +43,18 @@ public class BinarySearchTree {
             System.out.println();
         }
         System.out.println("Node count : " + bst.size(root, 2));
+    }
+
+    private void useIterator(TreeNode root) {
+        InOrderIterator it = new InOrderIterator(root);
+        while (it.hasNext()) {
+            TreeNode next = it.next();
+            System.out.println(next.data);
+        }
+    }
+
+    public InOrderIterator iterator() {
+        return new InOrderIterator(root);
     }
 
     private static void resetState(TreeNode root) {
@@ -137,14 +153,17 @@ public class BinarySearchTree {
 
     /*****************************************************
      *
-     *            BFS TRAVERSAL
+     *            BFS SEARCH
      *
      ******************************************************/
-    public void bfsTraversal(TreeNode root) {
+    public boolean bfsTraversal(TreeNode root, int value) {
         if (root == null) {
-            return;
+            return false;
         }
-
+        if (root.data == value) {
+            System.out.println("Found");
+            return true;
+        }
         root.visited = true;
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
@@ -155,13 +174,19 @@ public class BinarySearchTree {
             if (current != null) {
                 System.out.println(current.data);
                 for (TreeNode node : current.getChildNodes()) {
-                    if (node != null && !node.visited) {
-                        node.visited = true;
-                        queue.add(node);
+                    if (node != null) {
+                        if (node.data == value) {
+                            System.out.println("Found");
+                            return true;
+                        } else {
+                            node.visited = true;
+                            queue.add(node);
+                        }
                     }
                 }
             }
         }
+        return false;
     }
 
     /*****************************************************

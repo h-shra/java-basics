@@ -6,6 +6,7 @@ public class TreeNode {
 
     TreeNode left;
     TreeNode right;
+    TreeNode parent;
     int data;
     //for BFS/DFS
     boolean visited;
@@ -14,12 +15,14 @@ public class TreeNode {
         this.data = data;
         this.left = null;
         this.right = null;
+        this.parent = null;
         this.visited = false;
     }
 
-    public TreeNode(int data, TreeNode left, TreeNode right) {
+    public TreeNode(int data, TreeNode left, TreeNode right, TreeNode parent) {
         this.left = left;
         this.right = right;
+        this.parent = parent;
         this.data = data;
         this.visited = false;
     }
