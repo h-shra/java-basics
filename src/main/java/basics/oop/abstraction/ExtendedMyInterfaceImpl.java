@@ -1,9 +1,9 @@
-package basics;
+package basics.oop.abstraction;
 
-public class ExtendedImpl implements ExtendedMyInterface {
+public class ExtendedMyInterfaceImpl implements ExtendedMyInterface {
 
     public static void main(String[] args) {
-        MyInterface impl = new ExtendedImpl();
+        MyInterface impl = new ExtendedMyInterfaceImpl();
         impl.defaultMethodWithBody();
         MyInterface.staticMethodWithBody();
     }

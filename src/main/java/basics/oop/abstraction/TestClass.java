@@ -1,9 +1,6 @@
-package basics;
+package basics.oop.abstraction;
 
-/**
- * Created by shraddha on 3/22/17.
- */
-public class MyClass {
+public class TestClass {
     public void myMethod() {
         MyInterface myInterface = new MyInterfaceImpl();
 

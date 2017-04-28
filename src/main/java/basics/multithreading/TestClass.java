@@ -1,4 +1,4 @@
-package multithreading;
+package basics.multithreading;
 
 public class TestClass {
     static int x = 10;

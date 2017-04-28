@@ -1,4 +1,4 @@
-package basics;
+package basics.oop.abstraction;
 
 public interface MyInterface {
 

@@ -1,4 +1,4 @@
-package multithreading;
+package basics.multithreading;
 
 public class Thread1 extends Thread {
     TestClass test;

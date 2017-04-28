@@ -1,4 +1,4 @@
-package multithreading.deadlock;
+package basics.multithreading.deadlock;
 
 public class Transaction {
 

@@ -1,4 +1,4 @@
-package basics;
+package basics.oop.abstraction;
 
 public class MyInterfaceImpl implements MyInterface {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package multithreading;// Lazily initialized, cached hashCode
+package basics.multithreading;// Lazily initialized, cached hashCode
 
 public class Volatile {
     private volatile int hashCode; // (See Item 71)
