@@ -1,4 +1,4 @@
-package basics.oop.overriding;
+package basics.oop.polymorphism;
 
 public class Child extends Parent {
 

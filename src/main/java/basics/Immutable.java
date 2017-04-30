@@ -1,8 +1,10 @@
-package questions;
+package basics;
 
-/*
-    Don't allow subclasses to override methods. The simplest way to do this is to declare the class as final.
-    A more sophisticated approach is to make the constructor private and construct instances in factory methods.
+/**
+ * Don't allow subclasses to override methods. Declare the class as final.
+ * Ensure class members are immutable. Override clone method to create new instances.
+ * A more sophisticated approach is to make the constructor private and
+ * construct instances in factory methods.
  */
 public final class Immutable implements Cloneable {
 
