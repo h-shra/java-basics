@@ -35,22 +35,14 @@ public class LinkedListOperations {
         listOperations.print(head);
         head = listOperations.removeNonDups(head);
         listOperations.print(head);
-        /*head = operation.removeDups(head);
-        operation.print(head);
-        head = operation.addAtEnd(head, new Integer(9));
-        head = operation.addAtEnd(head, new Integer(9));
-        operation.print(head);
-        System.out.println(operation.returnNthFromLast(head, 3).data);
-        Node first = head;
-        Node second = new Node(20000);
-        second = operation.addAtEnd(second, 2000);
-        second = operation.addNodeAt(second, operation.getNodeAt(first, 3), operation.size(second) - 1);
-        System.out.println("Two lists");
-        operation.print(first);
-        System.out.println("--");
-        operation.print(second);
-        System.out.println(operation.findIfIntersect(first, second));
-        System.out.println(operation.findIntersectingNode(first, second).data);*/
+        head = listOperations.removeDups(head);
+        listOperations.print(head);
+        head = listOperations.addAtEnd(head, new Integer(9));
+        head = listOperations.addAtEnd(head, new Integer(9));
+        listOperations.print(head);
+        //System.out.println(listOperations.returnNthFromLast(head, 3).data);
+        listOperations.print(listOperations.removeKth(head, 3));
+
     }
 
 
@@ -265,55 +257,14 @@ public class LinkedListOperations {
         return first;
     }
 
-    //check if given lists intersect
-    public boolean findIfIntersect(Node firstList, Node secondList) {
-        //Two lists intersect if they have same tail (Object)
-        Node firstTail = findTailNode(firstList);
-        Node secondTail = findTailNode(secondList);
-        if (firstTail == secondTail) {
-            return true;
-        }
-        return false;
-    }
-
     //1->2->3->4->null
-    private Node findTailNode(Node node) {
+    public Node findTailNode(Node node) {
         Node tail = null;
         while (node.next != null) {
             node = node.next;
             tail = node;
         }
         return tail;
-    }
-
-    public Node findIntersectingNode(Node firstList, Node secondList) {
-        Node meetingPoint = null;
-        int firstLength = size(firstList);
-        int secondLength = size(secondList);
-        int lengthDiff = 0;
-        Node biggerList = null;
-        Node smallerList = null;
-        if (firstLength > secondLength) {
-            lengthDiff = firstLength - secondLength;
-            biggerList = firstList;
-            smallerList = secondList;
-        } else {
-            lengthDiff = secondLength - firstLength;
-            biggerList = secondList;
-            smallerList = firstList;
-        }
-        for (int i = 0; i < lengthDiff; i++) {
-            biggerList = biggerList.next;
-        }
-
-        while (biggerList != smallerList) {
-            biggerList = biggerList.next;
-            smallerList = smallerList.next;
-        }
-
-        meetingPoint = biggerList;
-
-        return meetingPoint;
     }
 
     public int size(Node head) {
@@ -363,6 +314,32 @@ public class LinkedListOperations {
             current = next;
         }
         head = prev;
+        return head;
+    }
+
+    public Node removeKth(Node head, int k) {
+        if (k < 0) {
+            return head;
+        }
+        if (head == null) {
+            return head;
+        }
+        int counter = 0;
+        Node fast = head;
+        while (counter <= k) {
+            if (fast != null) {
+                fast = fast.next;
+            }
+            counter++;
+        }
+        Node temp = head;
+        while (fast != null) {
+            fast = fast.next;
+            temp = temp.next;
+        }
+        if (temp.next != null) {
+            temp.next = temp.next.next;
+        }
         return head;
     }
 }
