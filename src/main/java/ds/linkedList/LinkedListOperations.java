@@ -1,7 +1,9 @@
 package ds.linkedList;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class LinkedListOperations {
 
@@ -35,7 +37,10 @@ public class LinkedListOperations {
         listOperations.print(head);
         head = listOperations.removeNonDups(head);
         listOperations.print(head);
-        head = listOperations.removeDups(head);
+        System.out.println("remove dups");
+        //head = listOperations.removeDups(head);
+        head = listOperations.removeDupsNoBuffer(head);
+
         listOperations.print(head);
         head = listOperations.addAtEnd(head, new Integer(9));
         head = listOperations.addAtEnd(head, new Integer(9));
@@ -197,17 +202,35 @@ public class LinkedListOperations {
     public Node removeDups(Node head) {
         if (head != null) {
             Node current = head;
-            Map<Integer, Integer> map = new HashMap<>(); //Set<Integer> more suitable
-            map.put(current.data, current.data);
+            Set<Integer> set = new HashSet<>();
+            set.add(current.data);//IMP step
 
             while (current.next != null) {
-                if (map.containsKey(current.next.data)) {
+                if (set.contains(current.next.data)) {
                     //found the dup, leave it out
                     current.next = current.next.next;
                 } else {
-                    map.put(current.data, current.data);
+                    set.add(current.data);
                     current = current.next;
                 }
+            }
+        }
+        return head;
+    }
+
+    public Node removeDupsNoBuffer(Node head) {
+        if (head != null) {
+            Node current = head;
+            while (current != null) {
+                Node runner = current;
+                while (runner.next != null) {
+                    if (runner.next.data == current.data) {
+                        runner.next = runner.next.next;
+                    } else {
+                        runner = runner.next;
+                    }
+                }
+                current = current.next;
             }
         }
         return head;

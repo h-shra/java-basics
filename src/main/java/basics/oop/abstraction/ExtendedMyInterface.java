@@ -4,6 +4,7 @@ public interface ExtendedMyInterface extends MyInterface {
 
     int VARIABLE = 0;
 
+    @Override
     default void defaultMethodWithBody() {
         //Override it to do something else
         System.out.println("ExtendedMyInterface.defaultMethodWithBody - Overrode it to do something else");

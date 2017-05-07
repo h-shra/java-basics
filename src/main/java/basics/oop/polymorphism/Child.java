@@ -1,5 +1,7 @@
 package basics.oop.polymorphism;
 
+import java.io.IOException;
+
 public class Child extends Parent {
 
     public static void main(String[] args) {
@@ -48,9 +50,11 @@ public class Child extends Parent {
 
     /**
      * A child can always override, use, see parent's public method.
+     * Overridden method does not have to throws same exception.
+     * Can have child exception.
      */
     @Override
-    public void publicParentMethod() {
+    public void publicParentMethod() throws IOException{
         System.out.println(this.getClass().getName());
         System.out.println(new Object() {
         }.getClass().getEnclosingMethod().getName());

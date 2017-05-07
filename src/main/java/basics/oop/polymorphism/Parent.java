@@ -1,5 +1,7 @@
 package basics.oop.polymorphism;
 
+import java.io.IOException;
+
 public class Parent {
 
     //NOTE: binding of static, final and private methods is always a static binding
@@ -40,7 +42,7 @@ public class Parent {
         }.getClass().getEnclosingMethod().getName());
     }
 
-    public void publicParentMethod() {
+    public void publicParentMethod() throws Exception {
         System.out.println(this.getClass().getName());
         System.out.println(new Object() {
         }.getClass().getEnclosingMethod().getName());

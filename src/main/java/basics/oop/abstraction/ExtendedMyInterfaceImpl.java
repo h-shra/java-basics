@@ -7,13 +7,11 @@ public class ExtendedMyInterfaceImpl implements ExtendedMyInterface {
         impl.defaultMethodWithBody();
         MyInterface.staticMethodWithBody();
     }
-/*
 
     @Override
     public void defaultMethodWithBody() {
         System.out.println("Changed default method to non-default here");
     }
-*/
 
     @Override
     public void doThis() {

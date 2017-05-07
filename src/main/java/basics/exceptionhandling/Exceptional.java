@@ -9,11 +9,7 @@ public class Exceptional {
     public static void main(String[] args) {
         Exceptional exceptional = new Exceptional();
         exceptional.testError();
-        try {
-            exceptional.testChecked();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        exceptional.testChecked();
         exceptional.testUnchecked();
     }
 
@@ -35,14 +31,18 @@ public class Exceptional {
     }
 
     /**
-     * The class Exception and any subclasses that are not also subclasses of RuntimeException are checked exceptions.
+     * The class Exception and any classes that are not the subclasses of RuntimeException are checked exceptions.
      * Compile-time checking for the presence of exception handlers is mandatory.
      */
-    private void testChecked() throws IOException {
+    private void testChecked() {
 
         File file = new File("C://Test.txt");
 
-        throw new IOException("Throwing it intentionally");
+        try {
+            throw new IOException("Throwing it intentionally");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // Should either catch or add "throws" in method signature
     }
 

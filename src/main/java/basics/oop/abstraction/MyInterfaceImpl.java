@@ -13,6 +13,12 @@ public class MyInterfaceImpl implements MyInterface {
 
     }
 
+    //Can't do this
+    /*@Override
+    default void defaultMethodWithBody() {
+
+    }*/
+
     @Override
     public int doThat(int withParam) {
         return 0;
