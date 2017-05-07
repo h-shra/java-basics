@@ -17,7 +17,7 @@ public class MyBST {
         postorderTraversal(myRoot);
         System.out.println("Size of the BST : " + size(myRoot));
 
-        //System.out.println("Size of the BST : " + size(myRoot, 2));
+        //System.out.println("Size of the BST : " + sizeFromLevelNoSpace(myRoot, 2));
 
         System.out.println("Max depth of the BST : " + maxDepth(myRoot));
         System.out.println("Minimum node in BST : " + min(myRoot).data);
@@ -161,14 +161,14 @@ public class MyBST {
     //w/o parent pointer
     public static TreeNode inorderLca(TreeNode root, TreeNode x, TreeNode y) {
         if (root == null) {
-            return  null;
+            return null;
         }
         if (root == x || root == y) {
             return root;
         }
         TreeNode left = inorderLca(root.left, x, y);
         TreeNode right = inorderLca(root.right, x, y);
-        if (left!=null && right!= null) {
+        if (left != null && right != null) {
             return root;
         } else {
             if (left != null) {
@@ -197,7 +197,7 @@ public class MyBST {
         if (root == null) {
             return 0;
         } else {
-            return size(root.left) + 1 + +size(root.right);
+            return size(root.left) + 1 + size(root.right);
         }
     }
 
@@ -267,11 +267,11 @@ public class MyBST {
     public static TreeNode leastCommonAncestor(TreeNode root, int val1, int val2) {
         TreeNode current = root;
         while (current != null) {
-            int value = current.data;
-            if (value > val1 && value > val2) {
+            int currentValue = current.data;
+            if (currentValue > val1 && currentValue > val2) {
                 current = current.left;
             }
-            if (value < val1 && value < val2) {
+            if (currentValue < val1 && currentValue < val2) {
                 current = current.right;
             } else {
                 return current;

@@ -13,7 +13,7 @@ public class ParentChildTest {
      * Overridden methods using dynamic binding, i.e, at run time.
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Parent parent = new Parent();
         Child child = new Child();
         parent.publicParentMethod();

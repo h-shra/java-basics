@@ -2,7 +2,7 @@ package ds.bst;
 
 import java.util.*;
 
-public class BinarySearchTree implements Iterable<TreeNode>{
+public class BinarySearchTree implements Iterable<TreeNode> {
 
     private static TreeNode root;
 
@@ -16,6 +16,14 @@ public class BinarySearchTree implements Iterable<TreeNode>{
             root = bst.insert(root, i);
         }
         System.out.println("Root : " + root.data);
+        ArrayList<ArrayList<TreeNode>> arrayLists = bst.generateLevelLists(root);
+        for (ArrayList<TreeNode> list : arrayLists) {
+            System.out.print("Level : ");
+            for (TreeNode node : list) {
+                System.out.print(node.data + " ");
+            }
+            System.out.println();
+        }
         System.out.println("preOrder");
         bst.preOrder(root);
         System.out.println("inOrder");
@@ -25,16 +33,21 @@ public class BinarySearchTree implements Iterable<TreeNode>{
         System.out.println("inOrder using iterator");
         bst.useIterator(root);
         System.out.println("BFS search");
-        System.out.println(bst.bfsTraversal(root, 77));
-        resetState(root);
+        /*System.out.println(bst.bfsTraversal(root, 77));
+        resetState(root);*/
         System.out.println(bst.bfsTraversal(root, 7));
         resetState(root);
         System.out.println("DFS traversal");
         bst.dfsTraversal(root);
+        resetState(root);
+        System.out.println("DFS traversal rec");
+        bst.dfsTraversalRec(root);
+        resetState(root);
         System.out.println("Minimal Height BST");
         root = bst.constructMinimalBstFromSortedArray(new int[]{0, 2, 3, 60, 100, 2200});
         System.out.println("Level lists");
-        ArrayList<ArrayList<TreeNode>> arrayLists = bst.generateLevelLists(root);
+        arrayLists.clear();
+        arrayLists = bst.generateLevelLists(root);
         for (ArrayList<TreeNode> list : arrayLists) {
             System.out.print("Level : ");
             for (TreeNode node : list) {
@@ -42,7 +55,11 @@ public class BinarySearchTree implements Iterable<TreeNode>{
             }
             System.out.println();
         }
-        System.out.println("Node count : " + bst.size(root, 2));
+        System.out.println("Height : " + bst.height(root));
+        System.out.println("Size : " + bst.size(root));
+        System.out.println("Node count from level 2, constant space : " + bst.sizeFromLevelNoSpace(root, 2));
+        System.out.println("Node count from level 2 : " + bst.sizeFromLevel(root, 2));
+        System.out.println("Node count at level 2 : " + bst.sizeAtLevel(root, 2));
     }
 
     private void useIterator(TreeNode root) {
@@ -160,17 +177,12 @@ public class BinarySearchTree implements Iterable<TreeNode>{
         if (root == null) {
             return false;
         }
-        if (root.data == value) {
-            System.out.println("Found");
-            return true;
-        }
+        LinkedList<TreeNode> queue = new LinkedList<>();//Has to be double linked list
         root.visited = true;
-        LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
-        TreeNode current;
         while (!queue.isEmpty()) {
-            current = queue.removeFirst(); //has to be removeFirst
+            TreeNode current = queue.removeFirst(); //has to be removeFirst
             if (current != null) {
                 System.out.println(current.data);
                 for (TreeNode node : current.getChildNodes()) {
@@ -208,11 +220,24 @@ public class BinarySearchTree implements Iterable<TreeNode>{
             if (current != null) {
                 System.out.println(current.data);
                 for (TreeNode node : current.getChildNodes()) {
-                    if (node != null && !node.visited) {
+                    if (node != null && node.visited == false) {
                         node.visited = true;
                         stack.push(node);
                     }
                 }
+            }
+        }
+    }
+
+    public void dfsTraversalRec(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.println(root.data);
+        root.visited = true;
+        for (TreeNode child : root.getChildNodes()) {
+            if (child != null && child.visited == false) {
+                dfsTraversalRec(child);
             }
         }
     }
@@ -229,12 +254,53 @@ public class BinarySearchTree implements Iterable<TreeNode>{
         return size(root.left) + size(root.right) + 1;
     }
 
+    //Counts nodes from given node to leaf level
+    //Returns total sizeFromLevelNoSpace if given root node
+    public int countNodes(TreeNode node) {
+        if (node == null) {
+            return 0;
+        } else if (node.left == null && node.right == null) {
+            return 1;
+        } else {
+            return countNodes(node.left) + countNodes(node.right);
+        }
+    }
+
     /*****************************************************
      *
      *      Number of Nodes from given level onwards
      *
      ******************************************************/
-    public int size(TreeNode root, int level) {
+    public int sizeFromLevelNoSpace(TreeNode root, int level) {
+        //Find max height and use sizeAtLevel from given level until you reach height
+        int height = height(root);
+        int size = 0;
+        while (level <= height) {
+            size = size + sizeAtLevel(root, level);
+            level++;
+        }
+        return size;
+    }
+
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return 1 + Math.max(height(root.left), height(root.right));
+        }
+    }
+
+    public int sizeAtLevel(TreeNode root, int level) {
+        if (root == null) {
+            return 0;
+        } else if (level == 1) {
+            return 1;
+        } else {
+            return sizeAtLevel(root.left, level - 1) + sizeAtLevel(root.right, level - 1);
+        }
+    }
+
+    public int sizeFromLevel(TreeNode root, int level) {
         if (root == null) {
             return 0;
         }
