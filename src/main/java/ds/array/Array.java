@@ -87,6 +87,7 @@ public class Array {
         return sliding_min;
     }
 
+    //{2, 1, 3, 4, 6, 3, 8, 9, 10, 12, 56}, 3
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length == 0)
             return new int[0];
