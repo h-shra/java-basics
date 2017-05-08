@@ -10,13 +10,14 @@ What if the values are not distinct?
 public class MagicIndex {
     public static void main(String args[]) {
         //int[] array = {-12, -1, 2, 10};
-        int[] array = {-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13};
+        int[] array = {-40, -20, -1, 1, 2, 3, 7, 7, 9, 12, 13};
         boolean result = isMagicIndex(array);
         System.out.println(result);
         result = isMagicIndexUsingBS(array);
         System.out.println(result);
     }
 
+    //O(n)
     private static boolean isMagicIndex(int[] inputArray) {
         for (int i = 0; i < inputArray.length; i++) {
             if (inputArray[i] == i) {
@@ -27,6 +28,7 @@ public class MagicIndex {
         return false;
     }
 
+    //O(log n)
     public static boolean isMagicIndexUsingBS(int[] inputArray) {
         return usingBS(inputArray, 0, inputArray.length - 1);
     }

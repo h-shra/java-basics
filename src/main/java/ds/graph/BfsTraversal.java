@@ -48,8 +48,8 @@ public class BfsTraversal {
                 System.out.println(current.data);
                 for (GraphNode node : current.connectedNodes) {
                     if (!node.visited) {
-                        queue.enqueue(node);
                         node.visited = true;
+                        queue.enqueue(node);
                     }
                 }
             }

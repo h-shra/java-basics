@@ -5,7 +5,9 @@ package basics.singleton;
  * It disallows clone(), supports Serialization and is thread safe.
  */
 public enum SingletonViaEnum {
-    INSTANCE;
+    INSTANCE_ONE,
+    INSTANCE_TWO;
+
     private String text;
 
     //explicit constructor

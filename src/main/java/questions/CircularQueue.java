@@ -11,22 +11,35 @@ public class CircularQueue {
     */
 
     Integer[] queue;
-    int start = 0;
-    int end = 0;
+    int start;
+    int end;
 
     public CircularQueue(int size) {
-        queue = new Integer[size + 1];
         //allocate +1 if you fully want to utilize requested size
+        queue = new Integer[size+1];
+        start = 0;
+        end = 0;
     }
 
     public static void main(String[] args) {
+        System.out.println(Character.getNumericValue('a'));
+        int i = 'A';
+        System.out.println(i);
         CircularQueue circularQueue = new CircularQueue(3);
         circularQueue.enqueue(3); // 3 _ _
         circularQueue.enqueue(2); // 3 2 _
         circularQueue.enqueue(1); // 3 2 1
+        circularQueue.print();
         circularQueue.enqueue(0); // Error
-        int output = circularQueue.dequeue();
+        circularQueue.dequeue();
         circularQueue.enqueue(0); // 0(end) 2(start) 1
+        circularQueue.print();
+    }
+    private void print() {
+        for (Integer i: queue) {
+            System.out.print(i + ",");
+        }
+        System.out.println();
     }
 
     private Integer dequeue() {

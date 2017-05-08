@@ -36,14 +36,80 @@ public class Array {
         output = array.findAllElementsWithOddOccurrence(new Integer[]{1, 3, 2, 5, 4, 5, 2, 4, 3, 9, 5, 2, 4, 4, 2});
         System.out.println("Done");
         for (Integer number : output) {
-            System.out.println(number);
+            System.out.print(number + ".");
         }
+        System.out.println();
+
         List<Integer> kMostFrequent = array.findKMostFrequent(new int[]{1, 2, 2, 2, 2, 2, 3, 3, 3, 6, 6, 6, 6}, 2);
         for (Integer i : kMostFrequent) {
-            System.out.println(i);
+            System.out.print(i + ".");
         }
+        System.out.println();
+
+        int[] minInWindow = array.slidingWindowMin(new int[]{2, 1, 3, 4, 6, 3, 8, 9, 10, 12, 56}, 4);
+        for (Integer i : minInWindow) {
+            System.out.print(i + ".");
+        }
+        System.out.println();
+
+        int[] maxInWindow = array.maxSlidingWindow(new int[]{2, 1, 3, 4, 6, 3, 8, 9, 10, 12, 56}, 3);
+        for (Integer i : maxInWindow) {
+            System.out.print(i + ".");
+        }
+        System.out.println();
+
+        System.out.println(array.countFrequencyInSortedArray(new int[]{2, 2, 2, 2, 3, 3, 3, 6, 6}, 2));
     }
 
+    // [2,1,3,4,6,3,8,9,10,12,56]
+    // 2,1,3,4
+    // 1,3,4,6
+    // 3,4,6,3
+    public int[] slidingWindowMin(int[] input, int w) {
+        final int[] minLeft = new int[input.length];
+        final int[] minRight = new int[input.length];
+
+        minLeft[0] = input[0];
+        minRight[input.length - 1] = input[input.length - 1];
+
+        for (int i = 1; i < input.length; i++) {
+            minLeft[i] = (i % w == 0) ? input[i] : Math.min(minLeft[i - 1], input[i]);
+
+            final int j = input.length - i - 1;
+            minRight[j] = (j % w == 0) ? input[j] : Math.min(minRight[j + 1], input[j]);
+        }
+
+        final int[] sliding_min = new int[input.length - w + 1];
+        for (int i = 0, j = 0; i + w <= input.length; i++) {
+            sliding_min[j++] = Math.min(minRight[i], minLeft[i + w - 1]);
+        }
+
+        return sliding_min;
+    }
+
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0)
+            return new int[0];
+
+        int[] result = new int[nums.length - k + 1];
+
+        LinkedList<Integer> deque = new LinkedList<Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            if (!deque.isEmpty() && deque.peekFirst() == i - k)
+                deque.poll();//removes first
+
+            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+                deque.removeLast();
+            }
+
+            deque.offer(i);//add
+
+            if (i + 1 >= k)
+                result[i + 1 - k] = nums[deque.peek()];
+        }
+
+        return result;
+    }
 
     public void unionOnSortedArrays(int[] a, int[] b) {
         if (a != null || b != null) {
@@ -171,6 +237,47 @@ public class Array {
         }
         return false;
     }
+    // 0  1  2  3  4  5  6  7  8
+    //{2, 2, 2, 2, 3, 3, 3, 6, 6}
+    public int countFrequencyInSortedArray(int[] input, int x) {
+        int low = 0;
+        int high = input.length - 1; //8
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (input[mid] > x) {
+                //search left
+                high = mid - 1;
+            } else if (input[mid] < x) {
+                //search right
+                low = mid + 1;
+            } else {
+                // found an occurrence, it may be the first or not. Move on until first occurrence is found
+                high = mid;
+            }
+        }
+
+        if (high < low || input[low] != x) {
+            // that means no occurrence
+            return -1;
+        }
+
+        // 0  1  2  3  4  5  6  7  8
+        //{2, 2, 2, 2, 3, 3, 3, 6, 6}
+        int first = low;
+        high = input.length - 1;
+
+        while (low < high) {
+            int mid = low + (high + 1 - low) / 2;
+            if (input[mid] > x) {
+                //search left
+                high = mid - 1;
+            } else {
+                low = mid;
+            }
+        }
+        return high - first + 1;
+
+    }
 
     //Find 2 integers that have given sum
     public void findPairs(int[] array, int sum) {
@@ -246,8 +353,7 @@ public class Array {
     //Find smallest unique number
     public int findSmallestElement(int[] input) {
         int smallest = Integer.MAX_VALUE;
-        for (int value :
-                input) {
+        for (int value : input) {
             if (value < smallest) {
                 smallest = value;
             }
