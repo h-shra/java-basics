@@ -1,4 +1,4 @@
-package basics.singleton;
+package designpatterns.singleton;
 
 /**
  * Enum class compiles to have static final variables with private constructor.
