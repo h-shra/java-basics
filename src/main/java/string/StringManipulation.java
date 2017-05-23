@@ -1,23 +1,30 @@
 package string;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class StringManipulation {
 
     public static void main(String[] args) {
 
+        testSplit("hi there");
+        testSplit("hello");
+        permutation("hi there");
+
         System.out.println(insertStar("test"));
         System.out.println(insertStar("A"));
 
-        String[] strings = say_what_you_see(new String[] { "12", "21" });
+        String[] strings = say_what_you_see(new String[]{"12", "21"});
         // String[] strings = say_what_you_see(new String[]{});
 
         for (String s : strings) {
             System.out.println(s);
         }
-        char[] a = new char[] { 0, 0, 0, 0, 0 };
+        char[] a = new char[]{0, 0, 0, 0, 0};
 
-        int[] ar = new int[] { 2, 4, 8, 10, 12, 14, 16 };
+        int[] ar = new int[]{2, 4, 8, 10, 12, 14, 16};
         System.out.println(findMissing(ar));
 
         System.out.println("String related functions");
@@ -55,6 +62,15 @@ public class StringManipulation {
         System.out.println(swapVowels("alliteration"));
         System.out.println(compressConsonants("apple"));
 
+    }
+
+    public static void testSplit(String input) {
+        List<String> params = new ArrayList<>();
+        if (input != null) {
+            params = Arrays.asList(input.split(" "));
+        }
+
+        System.out.println(params.size());
     }
 
     public static boolean hasUniqueChars(String input) {
@@ -304,7 +320,7 @@ public class StringManipulation {
         char[] inputArray = input.toCharArray();
         Stack<Character> vowelStack = new Stack<>();
 
-        for(int i=0; i< inputArray.length; i++) {
+        for (int i = 0; i < inputArray.length; i++) {
             char c = inputArray[i];
             if (isVowel(c)) {
                 vowelStack.push(c);
@@ -312,7 +328,7 @@ public class StringManipulation {
             }
         }
 
-        for(int i=0; i< inputArray.length; i++) {
+        for (int i = 0; i < inputArray.length; i++) {
             char c = inputArray[i];
             if (c == '#') {
                 inputArray[i] = vowelStack.pop();
@@ -330,7 +346,7 @@ public class StringManipulation {
     }
 
     private static boolean isVowel(char c) {
-        if((c == 'a') || (c == 'e')  || (c == 'i') || (c == 'o') || (c == 'u')) {
+        if ((c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u')) {
             return true;
         }
         return false;
@@ -341,13 +357,13 @@ public class StringManipulation {
         StringBuilder sb = new StringBuilder("");
         int consonantCount = 0;
 
-        for (int i=0; i<input.length(); i++) {
+        for (int i = 0; i < input.length(); i++) {
             char currentChar = input.charAt(i);
             if (isVowel(currentChar)) {
                 sb.append(consonantCount);
                 sb.append(currentChar);
             } else {
-                consonantCount ++;
+                consonantCount++;
             }
         }
 
