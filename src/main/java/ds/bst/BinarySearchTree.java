@@ -55,7 +55,7 @@ public class BinarySearchTree implements Iterable<TreeNode> {
             }
             System.out.println();
         }
-        System.out.println("Height : " + bst.height(root));
+        System.out.println("Height : " + bst.maxHeight(root));
         System.out.println("Size : " + bst.size(root));
         System.out.println("Node count from level 2, constant space : " + bst.sizeFromLevelNoSpace(root, 2));
         System.out.println("Node count from level 2 : " + bst.sizeFromLevel(root, 2));
@@ -272,8 +272,8 @@ public class BinarySearchTree implements Iterable<TreeNode> {
      *
      ******************************************************/
     public int sizeFromLevelNoSpace(TreeNode root, int level) {
-        //Find max height and use sizeAtLevel from given level until you reach height
-        int height = height(root);
+        //Find max maxHeight and use sizeAtLevel from given level until you reach maxHeight
+        int height = maxHeight(root);
         int size = 0;
         while (level <= height) {
             size = size + sizeAtLevel(root, level);
@@ -282,11 +282,11 @@ public class BinarySearchTree implements Iterable<TreeNode> {
         return size;
     }
 
-    public int height(TreeNode root) {
+    public int maxHeight(TreeNode root) {
         if (root == null) {
             return 0;
         } else {
-            return 1 + Math.max(height(root.left), height(root.right));
+            return 1 + Math.max(maxHeight(root.left), maxHeight(root.right));
         }
     }
 
